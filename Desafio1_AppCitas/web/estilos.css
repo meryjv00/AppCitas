@@ -8,9 +8,7 @@ and open the template in the editor.
     Author     : Mery
 */
 
-p * {
-    display: block;
-}
+
 
 .row::after 
 {
@@ -72,7 +70,6 @@ body{
 }
 
 main form{
-    background-color: white;
     margin-top: 200px;
     margin-bottom: 200px;
     border: 3px solid white;
@@ -114,13 +111,8 @@ header div:nth-child(3) p{
     font-size: 20px;
 }
 
-form h1, form p, span{
-    text-align: center;
-}
-input{
-    display:block;
-    margin:auto;
-}
+
+
 form h1{
     color:rgb(60,47,47);
 }
@@ -137,3 +129,4 @@ main.registro form{
     border: 3px solid white;
     background: rgb(201,151,137);
 }
+

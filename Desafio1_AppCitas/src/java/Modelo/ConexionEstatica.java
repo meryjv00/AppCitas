@@ -155,4 +155,50 @@ public class ConexionEstatica {
         }
         return correcto;
     }
+
+    public static boolean eliminarUsuario(Usuario u) {
+        boolean correcto = false;
+        try {
+            String Sentencia = "DELETE FROM " + Constantes.tabla_usuarios + " WHERE Email = '" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+            //Borrar de + sitios
+            Sentencia = "DELETE FROM " + Constantes.tabla_asignacion_roles + " WHERE Email = '" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+            correcto = true;
+        } catch (SQLException ex) {
+        }
+        return correcto;
+    }
+
+    public static void editarUsuario(Usuario u) {
+        try {
+            String sentencia = "UPDATE " + Constantes.tabla_usuarios + " set Activado = " + u.isActivado() + " WHERE Email = '" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+
+        } catch (SQLException ex) {
+        }
+    }
+
+    public static void hacerAdmin(Usuario u) {
+        try {
+            String sentencia = "INSERT INTO " + Constantes.tabla_asignacion_roles + " VALUES('" + u.getEmail() + "',1)";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+
+        } catch (SQLException ex) {
+        }
+    }
+
+    public static boolean esAdmin(Usuario u) {
+        boolean esAdmin = false;
+        try {
+            String sentencia = "SELECT * FROM " + Constantes.tabla_asignacion_roles + " WHERE Email = '" + u.getEmail() + "' AND id=1";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                esAdmin = true;
+            }
+
+        } catch (SQLException ex) {
+        }
+        return esAdmin;
+    }
 }
