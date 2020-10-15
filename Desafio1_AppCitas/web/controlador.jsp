@@ -41,14 +41,29 @@
                                 usu.addRol(rol);
                             }
                         }
-
-                        ConexionEstatica.cerrarBD();
                         session.setAttribute("usuarios", usuarios);
-                        response.sendRedirect("Vistas/elegirAdmin.jsp");
+                        ConexionEstatica.cerrarBD();
+
+                        if (u.isHaIniciado()) {
+                            response.sendRedirect("Vistas/elegirAdmin.jsp");
+                        } else {
+                            response.sendRedirect("Vistas/encuesta.jsp");
+                        }
 
                         //Si no, es usuario normal 
                     } else {
-                        response.sendRedirect("Vistas/inicio.jsp");
+                        //Si el usuario no está activado no puede logear
+                        if (!u.isActivado()) {
+                            session.setAttribute("mensaje", "¡Cuenta desactivada!");
+                            response.sendRedirect("index.jsp");
+                            //Usuario activado: comprobamos que ya ha iniciado o no para hacer la encuesta
+                        } else {
+                            if (u.isHaIniciado()) {
+                                response.sendRedirect("Vistas/inicio.jsp");
+                            } else {
+                                response.sendRedirect("Vistas/encuesta.jsp");
+                            }
+                        }
                     }
                 } else {
                     response.sendRedirect("Vistas/fracaso.jsp");
@@ -87,7 +102,44 @@
             if (request.getParameter("entrarUsu") != null) {
                 response.sendRedirect("Vistas/inicio.jsp");
             }
-            
+
+            //ENCUESTA PREFERENCIAS
+            if (request.getParameter("Rellenar") != null) {
+                Usuario u = (Usuario) session.getAttribute("usuario");
+                String relacion = request.getParameter("relacion").toString();
+                int deporte = Integer.parseInt(request.getParameter("deporte"));
+                int arte = Integer.parseInt(request.getParameter("arte"));
+                int politica = Integer.parseInt(request.getParameter("politica"));
+                String tieneHijos = request.getParameter("tieneHijos");
+                String quiereHijos = request.getParameter("quiereHijos");
+                String interesMujeres = request.getParameter("interesMujeres");
+                String interesHombres = request.getParameter("interesHombres");
+
+                u.setRelacion(relacion);
+                u.setDeporte(deporte);
+                u.setArte(arte);
+                u.setPolitica(politica);
+                if (tieneHijos != null) {
+                    u.setTieneHijos(true);
+                }
+                if (quiereHijos != null) {
+                    u.setQuiereHijos(true);
+                }
+                if (interesMujeres != null) {
+                    u.setInteresMujeres(true);
+                }
+                if (interesHombres != null) {
+                    u.setInteresHombres(true);
+                }
+                ConexionEstatica.nueva();
+                ConexionEstatica.rellenarPreferencias(u);
+                ConexionEstatica.encuestaRealizada(u);
+                ConexionEstatica.cerrarBD();
+                
+                response.sendRedirect("Vistas/inicio.jsp");
+
+            }
+
         %>
     </body>
 </html>

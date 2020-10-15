@@ -34,29 +34,35 @@
                 ConexionEstatica.nueva();
 
                 if (accion.equals("Eliminar Usuario")) {
-                    //Eliminar BDD
                     if (ConexionEstatica.eliminarUsuario(u)) {
                         usuarios.remove(posElegida);
                     }
-
                     response.sendRedirect("Vistas/CRUDusuarios.jsp");
                 }
 
-                if (accion.equals("Editar Usuario")) {
-                    String activado[] = request.getParameterValues("activado");
-                    u.setActivado(Boolean.parseBoolean(activado[posElegida]));
-
-                    //Editar BDD
+                if (accion.equals("Activar Cuenta")) {
+                    u.setActivado(true);
                     ConexionEstatica.editarUsuario(u);
 
                     response.sendRedirect("Vistas/CRUDusuarios.jsp");
                 }
 
+                if (accion.equals("Desactivar Cuenta")) {
+                    u.setActivado(false);
+                    ConexionEstatica.editarUsuario(u);
+                    response.sendRedirect("Vistas/CRUDusuarios.jsp");
+                }
+
                 if (accion.equals("Hacer administrador")) {
-                    //Añadir rol de administrador
                     if (!ConexionEstatica.esAdmin(u)) {
                         ConexionEstatica.hacerAdmin(u);
                     }
+                    response.sendRedirect("Vistas/CRUDusuarios.jsp");
+                }
+
+                if (accion.equals("Quitar administrador")) {
+                    //Quitar rol de administrador
+                    ConexionEstatica.quitarAdmin(u);
 
                     response.sendRedirect("Vistas/CRUDusuarios.jsp");
                 }
@@ -64,9 +70,41 @@
                 ConexionEstatica.cerrarBD();
             }
 
-            //REGISTRAR NUEVO USUARIO: OPCIÓN DE ADMINISTRADOR
             if (request.getParameter("RegistrarNuevo") != null) {
                 response.sendRedirect("Vistas/registroAdmin.jsp");
+            }
+
+            //REGISTRAR NUEVO USUARIO: OPCIÓN DE ADMINISTRADOR
+            if (request.getParameter("RegistrarComoAdmin") != null) {
+                String email = request.getParameter("email");
+                String dni = request.getParameter("dni");
+                String apodo = request.getParameter("apodo");
+                String pass1 = request.getParameter("psswd");
+                String tfno = request.getParameter("tfno");
+                int edad = Integer.parseInt(request.getParameter("edad"));
+                String rolAdmin = request.getParameter("rolAdmin");
+
+                Usuario u = new Usuario(email, dni, apodo, pass1, tfno, edad, false, false);
+
+                ConexionEstatica.nueva();
+                if (rolAdmin != null) {
+                    if (ConexionEstatica.insertarAdmin(u)) {
+                        response.sendRedirect("Vistas/CRUDusuarios.jsp");
+                    }
+                } else {
+                    if (ConexionEstatica.insertarUsuario(u)) {
+                        response.sendRedirect("Vistas/CRUDusuarios.jsp");
+                    }
+                }
+
+                ConexionEstatica.cerrarBD();
+            }
+
+            if (request.getParameter("VolverElegir") != null) {
+                response.sendRedirect("Vistas/elegirAdmin.jsp");
+            }
+            if (request.getParameter("VolvercCRUD") != null) {
+                response.sendRedirect("Vistas/CRUDusuarios.jsp");
             }
 
         %>

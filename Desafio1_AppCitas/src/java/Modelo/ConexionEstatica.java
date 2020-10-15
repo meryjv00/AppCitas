@@ -156,6 +156,24 @@ public class ConexionEstatica {
         return correcto;
     }
 
+    public static boolean insertarAdmin(Usuario u) {
+        boolean correcto = false;
+        try {
+            String sentencia = "INSERT INTO " + Constantes.tabla_usuarios + " VALUES('" + u.getEmail() + "','" + u.getDni() + "','" + u.getApodo() + "','" + u.getClave()
+                    + "','" + u.getTelefono() + "'," + u.getEdad() + "," + u.isActivado() + "," + u.isHaIniciado() + ")";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            sentencia = "INSERT INTO " + Constantes.tabla_asignacion_roles + " VALUES('" + u.getEmail() + "',1)";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            sentencia = "INSERT INTO " + Constantes.tabla_asignacion_roles + " VALUES('" + u.getEmail() + "',0)";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+
+            correcto = true;
+        } catch (SQLException ex) {
+            System.out.println("Error en el acceso a la BD.");
+        }
+        return correcto;
+    }
+
     public static boolean eliminarUsuario(Usuario u) {
         boolean correcto = false;
         try {
@@ -200,5 +218,53 @@ public class ConexionEstatica {
         } catch (SQLException ex) {
         }
         return esAdmin;
+    }
+
+    public static void quitarAdmin(Usuario u) {
+        try {
+            String Sentencia = "DELETE FROM " + Constantes.tabla_asignacion_roles + " WHERE Email = '" + u.getEmail() + "' and id=1";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+        } catch (SQLException ex) {
+        }
+
+    }
+
+    public static void encuestaRealizada(Usuario u) {
+        try {
+            String Sentencia = "UPDATE " + Constantes.tabla_usuarios + " SET HaIniciado = true WHERE Email = '" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+        } catch (SQLException ex) {
+        }
+    }
+
+    public static void rellenarPreferencias(Usuario u) {
+        try {
+            String Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',1,'" + u.getRelacion() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+            Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',2,'" + u.getDeporte() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+            Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',3,'" + u.getArte() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+            Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',4,'" + u.getPolitica() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+            Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',5,'" + u.isTieneHijos() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+            Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',6,'" + u.isQuiereHijos() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+            Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',7,'" + u.isInteresMujeres() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+            Sentencia = "INSERT INTO " + Constantes.tabla_asignacion_preferencias + " VALUES('" + u.getEmail() + "',8,'" + u.isInteresHombres() + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+
+        } catch (SQLException ex) {
+        }
+
     }
 }

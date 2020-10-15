@@ -46,6 +46,14 @@
                     </label>
                 </p>
                 <input type="submit" name="Aceptar" value="Aceptar"/>
+                <%
+                    if (session.getAttribute("mensaje") != null) {
+                        String mensaje = (String) session.getAttribute("mensaje");
+                %>
+                <span name="mensaje"><%=mensaje%></span>
+                <%
+                    }
+                %>
                 <p><a href="Vistas/olvidada.jsp">He olvidado la contraseña</a></p>
             </form>
             <div class="col-m-4"></div>
