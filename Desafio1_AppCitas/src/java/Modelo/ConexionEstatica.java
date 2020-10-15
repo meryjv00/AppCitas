@@ -85,6 +85,9 @@ public class ConexionEstatica {
                     String rol = Conj_Registros.getString("roles.Descripcion");
                     existe.addRol(rol);
                 }
+                //Le añadimos las preferencias
+                //sentencia = "SELECT * FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" +email+ "'";
+                
             }
         } catch (SQLException ex) {
             System.out.println("Error en el acceso a la BD.");
