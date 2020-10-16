@@ -17,7 +17,7 @@
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
-                <img src="img/logo.png" class="imagenLogo"/>
+                <img src="img/logo4.png" class="imagenLogo"/>
             </div>
         </header>
         <main class="row">
@@ -37,7 +37,7 @@
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
-                <p><input type="submit" name="Aceptar" value="Aceptar" class="boton"></p>
+                <p><input type="submit" name="Aceptar" value="Entrar" class="boton"></p>
 
                 <%
                     if (session.getAttribute("mensaje") != null) {

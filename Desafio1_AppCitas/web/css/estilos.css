@@ -67,18 +67,19 @@ and open the template in the editor.
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^INDEX^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 header{
-    background-color: antiquewhite;
 }
 footer{
-    background-color: antiquewhite;
-    height: 100px;
+    height: 242px;
     text-align: center;
     padding-top: 20px;
 }
 .imagenLogo{
-    width: 220px;
+    width: 250px;
     display: block;
     margin:auto;
+}
+body{
+    background-image: linear-gradient( 359deg,  rgba(150,192,255,1) -17.7%, rgba(255,180,161,1) 101.5% );
 }
 /*------------------------------FORMULARIO LOGIN*/
 @keyframes entrada{
@@ -93,7 +94,9 @@ footer{
 
 form[name=login]{
     padding: 20px;
-    border: 3px solid black;
+    border-radius: 20px;
+    border: solid 2px black;
+
     margin-top:50px;
     margin-bottom:50px;
 
@@ -115,13 +118,16 @@ form[name=login] h1{
 }
 
 .boton{
-    background: bisque;
+    background: white;
+    border: 1px solid black;
     padding: 4px;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
 }
 .boton:hover{
-    box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+    /*box-shadow: 0 4px 16px rgba(49, 138, 172, 1);*/
+    box-shadow: 0 4px 16px black;
+
     transition: all 0.2s ease;
 }
 
