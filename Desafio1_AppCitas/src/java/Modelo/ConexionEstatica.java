@@ -86,8 +86,15 @@ public class ConexionEstatica {
                     existe.addRol(rol);
                 }
                 //Le añadimos las preferencias
-                //sentencia = "SELECT * FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" +email+ "'";
-                
+                Object preferencias[] = (Object[]) obtenerPreferenciasUsuario(existe);
+                existe.setRelacion((String) preferencias[0]);
+                existe.setDeporte((int) preferencias[1]);
+                existe.setArte((int) preferencias[2]);
+                existe.setPolitica((int) preferencias[3]);
+                existe.setTieneHijos((boolean) preferencias[4]);
+                existe.setQuiereHijos((boolean) preferencias[5]);
+                existe.setInteresMujeres((boolean) preferencias[6]);
+                existe.setInteresHombres((boolean) preferencias[7]);
             }
         } catch (SQLException ex) {
             System.out.println("Error en el acceso a la BD.");
@@ -110,14 +117,7 @@ public class ConexionEstatica {
                 u = new Usuario(Conj_Registros.getString("Email"), Conj_Registros.getString("Dni"), Conj_Registros.getString("Apodo"),
                         Conj_Registros.getString("Clave"), Conj_Registros.getString("Telefono"), Conj_Registros.getInt("Edad"), Conj_Registros.getBoolean("Activado"),
                         Conj_Registros.getBoolean("HaIniciado"));
-                //Le añadimos el rol/es
-                /*
-                LinkedList roles = ConexionEstatica.obtenerRolesUsuario(u.getEmail());
-                for (int i = 0; i < roles.size(); i++) {
-                    String rol = (String) roles.get(i);
-                    u.addRol(rol);
-                }
-                 */
+
                 //Añadimos usuario a la LK
                 usuarios.add(u);
             }
@@ -141,6 +141,71 @@ public class ConexionEstatica {
         }
         return roles;
 
+    }
+
+    public static Object obtenerPreferenciasUsuario(Usuario u) {
+        String sentencia = "";
+        Object preferencias[] = new Object[8];
+        //Add relacion
+        try {
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND IdPref=1";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                String relacion = Conj_Registros.getString("Valoracion");
+                preferencias[0] = relacion;
+            }
+            //Add deporte
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND idPref=2";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                int deporte = Integer.parseInt(Conj_Registros.getString("Valoracion"));
+                preferencias[1] = deporte;
+            }
+            //Add arte
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND idPref=3";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                int arte = Integer.parseInt(Conj_Registros.getString("Valoracion"));
+                preferencias[2] = arte;
+            }
+            //Add politica
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND idPref=4";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                int politica = Integer.parseInt(Conj_Registros.getString("Valoracion"));
+                preferencias[3] = politica;
+            }
+            //Add tiene hijos
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND idPref=5";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                boolean tieneHijos = Boolean.parseBoolean(Conj_Registros.getString("Valoracion"));
+                preferencias[4] = tieneHijos;
+            }
+            //Add quiere hijos
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND idPref=6";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                boolean quiereHijos = Boolean.parseBoolean(Conj_Registros.getString("Valoracion"));
+                preferencias[5] = quiereHijos;
+            }
+            //Add interes mujeres
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND idPref=7";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                boolean interesMujeres = Boolean.parseBoolean(Conj_Registros.getString("Valoracion"));
+                preferencias[6] = interesMujeres;
+            }
+            //Add interes hombres
+            sentencia = "SELECT valoracion FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email='" + u.getEmail() + "' AND idPref=8";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                boolean interesHombres = Boolean.parseBoolean(Conj_Registros.getString("Valoracion"));
+                preferencias[7] = interesHombres;
+            }
+        } catch (SQLException ex) {
+        }
+        return preferencias;
     }
 
     public static boolean insertarUsuario(Usuario u) {

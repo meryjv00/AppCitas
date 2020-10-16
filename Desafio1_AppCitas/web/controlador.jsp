@@ -40,7 +40,19 @@
                                 String rol = (String) roles.get(j);
                                 usu.addRol(rol);
                             }
+                            Object preferencias[] = (Object[]) ConexionEstatica.obtenerPreferenciasUsuario(usu);
+                            if (preferencias[0] != null) {
+                                usu.setRelacion((String) preferencias[0]);
+                                usu.setDeporte((int) preferencias[1]);
+                                usu.setArte((int) preferencias[2]);
+                                usu.setPolitica((int) preferencias[3]);
+                                usu.setTieneHijos((boolean) preferencias[4]);
+                                usu.setQuiereHijos((boolean) preferencias[5]);
+                                usu.setInteresMujeres((boolean) preferencias[6]);
+                                usu.setInteresHombres((boolean) preferencias[7]);
+                            }
                         }
+
                         session.setAttribute("usuarios", usuarios);
                         ConexionEstatica.cerrarBD();
 
@@ -135,7 +147,7 @@
                 ConexionEstatica.rellenarPreferencias(u);
                 ConexionEstatica.encuestaRealizada(u);
                 ConexionEstatica.cerrarBD();
-                
+
                 response.sendRedirect("Vistas/inicio.jsp");
 
             }
