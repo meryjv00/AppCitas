@@ -86,15 +86,18 @@ public class ConexionEstatica {
                     existe.addRol(rol);
                 }
                 //Le añadimos las preferencias
-                Object preferencias[] = (Object[]) obtenerPreferenciasUsuario(existe);
-                existe.setRelacion((String) preferencias[0]);
-                existe.setDeporte((int) preferencias[1]);
-                existe.setArte((int) preferencias[2]);
-                existe.setPolitica((int) preferencias[3]);
-                existe.setTieneHijos((boolean) preferencias[4]);
-                existe.setQuiereHijos((boolean) preferencias[5]);
-                existe.setInteresMujeres((boolean) preferencias[6]);
-                existe.setInteresHombres((boolean) preferencias[7]);
+                if (existe.isHaIniciado()) {
+                    Object preferencias[] = (Object[]) obtenerPreferenciasUsuario(existe);
+                    existe.setRelacion((String) preferencias[0]);
+                    existe.setDeporte((int) preferencias[1]);
+                    existe.setArte((int) preferencias[2]);
+                    existe.setPolitica((int) preferencias[3]);
+                    existe.setTieneHijos((boolean) preferencias[4]);
+                    existe.setQuiereHijos((boolean) preferencias[5]);
+                    existe.setInteresMujeres((boolean) preferencias[6]);
+                    existe.setInteresHombres((boolean) preferencias[7]);
+                }
+
             }
         } catch (SQLException ex) {
             System.out.println("Error en el acceso a la BD.");
