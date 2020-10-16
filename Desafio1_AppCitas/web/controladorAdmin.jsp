@@ -103,10 +103,13 @@
             if (request.getParameter("VolverElegir") != null) {
                 response.sendRedirect("Vistas/elegirAdmin.jsp");
             }
-            if (request.getParameter("VolvercCRUD") != null) {
+            if (request.getParameter("VolverCRUD") != null) {
                 response.sendRedirect("Vistas/CRUDusuarios.jsp");
             }
-
+            if(request.getParameter("CerrarSesion")!= null){
+                session.invalidate();
+                response.sendRedirect("index.jsp");
+            }
         %>
 
     </body>

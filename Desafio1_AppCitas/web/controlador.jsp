@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="Modelo.Email"%>
 <%@page import="Auxiliar.Bitacora"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="Modelo.Usuario"%>
@@ -152,6 +153,37 @@
 
             }
 
+            //Cerrar sesion
+            if (request.getParameter("cerrarSesion") != null) {
+                session.invalidate();
+                response.sendRedirect("index.jsp");
+            }
+
+            //LLeva a index
+            if (request.getParameter("Volver") != null) {
+                response.sendRedirect("index.jsp");
+            }
+
+            //Enviar email
+            if (request.getParameter("EnviarEmail") != null) {
+                int az = (int) (Math.random() * 99999);
+
+                //Envía email con la contraseña nueva
+                Email email = new Email();
+                String de = "auxiliardaw2@gmail.com";
+                String clave = "Chubaca20";
+                String para = request.getParameter("emailpsswd");
+                String mensaje = "Nueva contraseña: " + az;
+                String asunto = "Contraseña olvidada";
+                email.enviarCorreo(de, clave, para, mensaje, asunto);
+                
+                //Asignar nueva contraseña al usuario
+                ConexionEstatica.nueva();
+                ConexionEstatica.modificarClave(para,az);
+                ConexionEstatica.cerrarBD();
+                response.sendRedirect("Vistas/mandado.jsp");
+                
+            }
         %>
     </body>
 </html>

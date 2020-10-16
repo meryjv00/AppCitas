@@ -13,29 +13,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../estilos.css">
-        <script src="https://kit.fontawesome.com/f1c00fba54.js" crossorigin="anonymous"></script>
-
+        <link rel="stylesheet" href="../css/estilos.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
+        <a name="arriba"></a>
         <header class="row">
+            <div class="col-m-4"></div>
             <div class="col-m-4">
-                <a href="index.jsp">
-                    <span>
-                        <i class="fas fa-dove"></i>
-                    </span>
-                </a>
-            </div>
-            <div class="col-m-4">
-                <h1>¡ENCUENTRA TU PAREJA IDEAL!</h1>
-            </div>
-            <div class="col-m-4">
-                <p><a href="../index.jsp">Cerrar sesión</a></p>
+                <img src="../img/logo4.png" class="imagenLogo"/>
             </div>
         </header>
         <main class="row">
             <div class="col-m-1"></div>
-            <form name="form" action="../controladorAdmin.jsp" class="col-m-10 crud"> 
+            <form name="crud" action="../controladorAdmin.jsp" class="col-m-10 crud"> 
+                <h1>Gestión de usuarios</h1>
+                <fieldset class="crud">
+                    <legend>Opciones</legend>
+                    <p><input type="submit" name="RegistrarNuevo" value="Registrar nuevo usuario" class="boton"></p>
+                    <p><input type="submit" name="VolverElegir" value="Volver" class="boton"></p>
+                    <p><input type="submit" name="CerrarSesion" value="Cerrar sesión" class="boton"></p>
+                </fieldset>
+                
+                <br>
+                <hr>
                 <%
                     ConexionEstatica.nueva();
                     LinkedList usuarios = ConexionEstatica.obtenerUsuarios();
@@ -60,24 +61,24 @@
                         boolean iniciado = u.isHaIniciado();
                         if (iniciado == false) {
                             haIniciado = "No ha iniciado sesión";
-                            colorInicio = "red";
+                            colorInicio = "#ff6f69";
                         } else {
                             haIniciado = "Ha iniciado sesión";
-                            colorInicio = "green";
+                            colorInicio = "#96ceb4";
                         }
                         if (activado == false) {
                             cuentaActivada = "Cuenta desactivada";
-                            colorActivado = "red";
+                            colorActivado = "#ff6f69";
                         } else {
                             cuentaActivada = "Cuenta activada";
-                            colorActivado = "green";
+                            colorActivado = "#96ceb4";
                         }
                         ConexionEstatica.nueva();
                         if (ConexionEstatica.esAdmin(u)) {
-                            colorAdmin = "green";
+                            colorAdmin = "#96ceb4";
                             texto = "Es administrador";
                         } else {
-                            colorAdmin = "red";
+                            colorAdmin = "#ff6f69";
                             texto = "No es administrador";
                         }
                         ConexionEstatica.cerrarBD();
@@ -91,27 +92,25 @@
                     <input type="text" name="edad" value="<%=edad%>" readonly>
                     <input type="text" style="background-color:<%=colorInicio%>" name="iniciado" value="<%=haIniciado%>" readonly>
                     <input type="text" style="background-color:<%=colorActivado%>" name="activado" value="<%=cuentaActivada%>" readonly >
-                    <input type="submit" name ="<%=i%>" value="Eliminar Usuario">
-                    <input type="submit" name="<%=i%>" value="Activar Cuenta">
-                    <input type="submit" name="<%=i%>" value="Desactivar Cuenta">
-                    <input type="submit" name="<%=i%>" value="Hacer administrador">
-                    <input type="submit" name="<%=i%>" value="Quitar administrador">
-                    <br>
-
                 </p>
+                <input type="submit" name ="<%=i%>" value="Eliminar Usuario" class="boton">
+                <input type="submit" name="<%=i%>" value="Activar Cuenta" class="boton">
+                <input type="submit" name="<%=i%>" value="Desactivar Cuenta" class="boton">
+                <input type="submit" name="<%=i%>" value="Hacer administrador" class="boton">
+                <input type="submit" name="<%=i%>" value="Quitar administrador" class=boton>
+                <br>  
+                <hr>
                 <%
                     }
 
                 %>
-                <input type="submit" name="RegistrarNuevo" value="Registrar">
-                <input type="submit" name="VolverElegir" value="Volver">
-
+                <a href="#arriba" name="IrArriba"><input type="button" class="boton" value="Volver arriba"></a>
             </form>
             <div class="col-m-1"></div>
         </main>
 
         <footer>
-            <p>María Juan Viñas</p>
+            <p>© María Juan Viñas, 2020</p>
         </footer>
     </body>
 </html>

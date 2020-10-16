@@ -10,21 +10,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../estilos.css">
-        <script src="https://kit.fontawesome.com/f1c00fba54.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/estilos.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+
     </head>
     <body>
 
         <header class="row">
+            <div class="col-m-4"></div>
             <div class="col-m-4">
-                <a href="../index.jsp">
-                    <span>
-                        <i class="fas fa-dove"></i>
-                    </span>
-                </a>
-            </div>
-            <div class="col-m-4">
-                <h1>¡ENCUENTRA TU PAREJA IDEAL!</h1></a>
+                <img src="../img/logo4.png" class="imagenLogo"/>
             </div>
         </header>
         <main class="row registro">
@@ -80,12 +75,13 @@
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
-                <input type="submit" name="Registrar" value="Confirmar"/>
+                <input type="submit" name="Registrar" value="Confirmar" class="boton"/>
+                <p><a href="../index.jsp"><input type="button" name="Volver" value="Volver" class="boton"/></a></p>
             </form>
             <div class="col-m-4"></div>
         </main>
         <footer>
-            <p>María Juan Viñas</p>
+            <p>© María Juan Viñas, 2020</p>
         </footer>
     </body>
 </html>

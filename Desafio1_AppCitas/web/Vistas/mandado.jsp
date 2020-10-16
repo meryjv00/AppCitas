@@ -1,6 +1,6 @@
 <%-- 
-    Document   : fracaso
-    Created on : 14-oct-2020, 15:49:42
+    Document   : mandado
+    Created on : 17-oct-2020, 0:19:19
     Author     : Mery
 --%>
 
@@ -14,17 +14,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
-
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
                 <img src="../img/logo4.png" class="imagenLogo"/>
             </div>
         </header>
-        <main class="row registro">
+        <main class="row">
             <div class="col-m-4"></div>
             <form name="login" action="../controlador.jsp" class="col-m-4"> 
-                <h1>Inicio de sesión incorrecto</h1>
+                <h1>Correo enviado!</h1>
                 <input type="submit" name="Volver" value="Volver" class="boton"/>
             </form>
             <div class="col-m-4"></div>

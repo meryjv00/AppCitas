@@ -54,7 +54,7 @@
             </form>
             <div class="col-m-4"></div>
         </main>
-        <footer>
+        <footer class="index">
             <p>© María Juan Viñas, 2020</p>
         </footer>
     </body>

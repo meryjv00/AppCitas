@@ -336,6 +336,14 @@ public class ConexionEstatica {
 
         } catch (SQLException ex) {
         }
+    }
+
+    public static void modificarClave(String email, int az) {
+        try {
+            String sentencia = "UPDATE " + Constantes.tabla_usuarios + " SET Clave='" + az + "' WHERE Email like '" + email + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+        } catch (SQLException ex) {
+        }
 
     }
 }
