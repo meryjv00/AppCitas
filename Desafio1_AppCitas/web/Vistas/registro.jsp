@@ -24,7 +24,7 @@
         </header>
         <main class="row registro">
             <div class="col-m-4"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-4"> 
+            <form name="login" id="registro" action="../controlador.jsp" class="col-m-4"> 
                 <h1>Registrate</h1>
                 <p>
                     <label for="email">

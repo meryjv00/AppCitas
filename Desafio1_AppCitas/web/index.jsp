@@ -24,7 +24,7 @@
         </header>
         <main class="row">
             <div class="col-m-4"></div>
-            <form name="login" action="controlador.jsp" class="col-m-4"> 
+            <form name="login" id="login" action="controlador.jsp" class="col-m-4"> 
                 <h1>LOGIN</h1>
                 <hr>
                 <p>
