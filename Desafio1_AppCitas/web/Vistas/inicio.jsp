@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,43 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
-        
+        <header class="row">
+            <div class="col-m-4"></div>
+            <div class="col-m-4">
+                <img src="../img/logo4.png" class="imagenLogo"/>
+            </div>
+        </header>
+        <main class="row">
+            <div class="col-m-4"></div>
+            <form name="login" action="../controlador.jsp" class="col-m-4"> 
+                <%
+                    Usuario u = (Usuario) session.getAttribute("usuario");
+                    String apodo = u.getApodo();
+                %>
+                <h1>¡Hola de nuevo <%=apodo%>!</h1>
+                <div class="row">
+                    <div class="col-m-6">
+                        <input type="submit" name="verPersonasCompatibles" value="Ver personas compatibles" class="boton"/> 
+                    </div>
+                    <div class="col-m-6">
+                        <input type="submit" name="verAmigos" value="Ver amigos" class="boton"/> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-m-6">
+                        <input type="submit" name="verMensajes" value="Ver mensajes" class="boton"/> 
+                    </div>
+                    <div class="col-m-6">
+                        <input type="submit" name="verPerfil" value="Ver perfil" class="boton"/> 
+                    </div>
+                </div>
+                <hr>
+                <input type="submit" name="CerrarSesion" value="Cerrar Sesión" class="boton"/>
+            </form>
+            <div class="col-m-4"></div>
+        </main>
+        <footer class="index">
+            <p>© María Juan Viñas, 2020</p>
+        </footer>
     </body>
 </html>

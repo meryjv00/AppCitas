@@ -185,5 +185,19 @@ input:invalid{
 .error.active {
     padding: 0.3em;
 }
+/*----------------------------------------*/
+.barraProgreso{
+    border: 2px solid black;
+    margin-bottom: 30px;
+}
 
+.barraProgreso div{
+    height:24px;
+    width:0;
+    background-color: #7c748c;
+    text-align: center;
+}
 
+.escondido{
+    visibility: hidden;
+}

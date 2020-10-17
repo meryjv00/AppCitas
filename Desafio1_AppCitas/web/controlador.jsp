@@ -187,6 +187,16 @@
                 response.sendRedirect("Vistas/mandado.jsp");
 
             }
+            
+            //Ir a la pagina cargar personas
+            if(request.getParameter("verPersonasCompatibles")!= null){
+                response.sendRedirect("Vistas/cargandoPersonas.jsp");
+            }
+            
+            //Ir a la pagina de personas afines
+            if(request.getParameter("cargarPersonasCompatibles")!= null){
+                response.sendRedirect("Vistas/personasCompatibles.jsp");
+            }
         %>
     </body>
 </html>

@@ -125,7 +125,7 @@ function validacionRegistro() {
     });
 
     function errorEdad() {
-        if(edad.validity.valueMissing){
+        if (edad.validity.valueMissing) {
             edadError.textContent = 'Debe introducir una edad.';
         }
         //No cumple con el pattern
@@ -271,4 +271,20 @@ function validacionLogin() {
         mailError.className = 'error active';
     }
 
+
+}
+
+function avanzar() {
+    var elem = document.getElementById("progreso");
+    var width = 1;
+    var id = setInterval(frame, 100);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            elem.style.width = width + '%';
+            elem.innerHTML = width * 1  + '%';
+        }
+    }
 }

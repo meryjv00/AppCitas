@@ -1,6 +1,6 @@
 <%-- 
-    Document   : fracaso
-    Created on : 14-oct-2020, 15:49:42
+    Document   : cargandoPersonas
+    Created on : 17-oct-2020, 21:25:39
     Author     : Mery
 --%>
 
@@ -9,13 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login incorrecto</title>
+        <title>Loading...</title>
+        <link rel="icon" type="image/png" href="../img/logo4.png">
         <link rel="stylesheet" href="../css/estilos.css">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png" href="../img/logo4.png">
+        <script src="../js/validacion.js"></script>
     </head>
-    <body>
-
+    <body onload="avanzar()">
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
@@ -25,8 +25,12 @@
         <main class="row">
             <div class="col-m-4"></div>
             <form name="login" action="../controlador.jsp" class="col-m-4"> 
-                <h1>Inicio de sesión incorrecto</h1>
-                <input type="submit" name="Volver" value="Volver" class="boton"/>
+                <h1>Loading</h1>
+                <div class="barraProgreso">
+                    <div id="progreso"></div>
+                </div>
+                <p>Cargando personas compatibles...</p>
+                <input type="submit" name="cargarPersonasCompatibles" value="Ir" class="boton "> 
             </form>
             <div class="col-m-4"></div>
         </main>
@@ -34,4 +38,6 @@
             <p>© María Juan Viñas, 2020</p>
         </footer>
     </body>
+
+
 </html>
