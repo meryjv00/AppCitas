@@ -13,8 +13,9 @@
         <link rel="stylesheet" href="../css/estilos.css">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="../img/logo4.png">
+        <script src="../js/validacion.js"></script>
     </head>
-    <body>
+    <body onload="validacionRegistro()">
 
         <header class="row">
             <div class="col-m-4"></div>
@@ -24,54 +25,54 @@
         </header>
         <main class="row registro">
             <div class="col-m-4"></div>
-            <form name="login" id="registro" action="../controlador.jsp" class="col-m-4"> 
+            <form name="login" id="registro" action="../controlador.jsp" class="col-m-4" novalidate> 
                 <h1>Registrate</h1>
                 <p>
                     <label for="email">
                         <span>Introduce tu email: </span>
-                        <input type="email" name="email" id="email" required/>
+                        <input type="email" name="email" id="email" minlength="8" maxlength="20" required />
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
                 <p>
                     <label for="dni">
                         <span>Introduce tu dni: </span>
-                        <input type="text" name="dni" id="dni" required/>
+                        <input type="text" name="dni" id="dni" required pattern="^[0-9]{2}\.[0-9]{3}\.[0-9]{3}-[A-Z]$"/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
                 <p>
                     <label for="apodo">
                         <span>Introduce tu nick: </span>
-                        <input type="text" name="apodo" id="apodo" required/>
+                        <input type="text" name="apodo" id="apodo" required minlength="5" maxlength="15"/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
                 <p>
                     <label for="psswd">
                         <span>Introduce tu contraseña: </span>
-                        <input type="password" name="psswd" id="psswd" required/>
+                        <input type="password" name="psswd" id="psswd" required minlength="3" maxlength="15"/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
                 <p>
                     <label for="psswd2">
                         <span>Repite tu contraseña: </span>
-                        <input type="password" name="psswd2" id="psswd2" required/>
+                        <input type="password" name="psswd2" id="psswd2" required />
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
                 <p>
                     <label for="tfno">
                         <span>Introduce tu teléfono: </span>
-                        <input type="text" name="tfno" id="tfno"/>
+                        <input type="text" name="tfno" id="tfno" pattern="^[0-9]{3}-[0-9]{3}-[0-9]{3}$"/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
                 <p>
                     <label for="edad">
                         <span>Introduce tu edad: </span>
-                        <input type="text" name="edad" id="edad"/>
+                        <input type="text" name="edad" id="edad" pattern="^[0-9]{1,3}$"/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>

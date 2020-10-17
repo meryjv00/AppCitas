@@ -205,3 +205,25 @@ fieldset.crud{
 a[name="IrArriba"] input{
     width: 100%;
 }
+
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^VALIDACION ERRORES^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
+input:invalid{
+    border-color: #ff6f69;
+}
+
+.error {
+    width: 100%;
+    font-size: 80%;
+    background-color: #7c748c;
+    border-radius: 0 0 5px 5px ;
+    box-sizing: border-box ;
+}
+
+.error.active {
+    padding: 0.3em;
+}
+
+
