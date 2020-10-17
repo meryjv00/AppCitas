@@ -10,8 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="icon" type="image/png" href="../img/logo4.png">
+        <link rel="stylesheet" href="../css/estilos.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        
     </body>
 </html>
