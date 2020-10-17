@@ -72,11 +72,12 @@
                 <p>
                     <label for="edad">
                         <span>Introduce tu edad: </span>
-                        <input type="text" name="edad" id="edad" pattern="^[0-9]{1,3}$"/>
+                        <input type="text" name="edad" id="edad" pattern="^[0-9]{1,3}$" required/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
                 <input type="submit" name="Registrar" value="Confirmar" class="boton"/>
+                <hr>
                 <p><a href="../index.jsp"><input type="button" name="Volver" value="Volver" class="boton"/></a></p>
             </form>
             <div class="col-m-4"></div>

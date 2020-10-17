@@ -26,7 +26,7 @@ function validacionRegistro() {
 
     //-----------------------------FORMULARIO SUBMIT
     var correcto;
-    
+
     form.addEventListener('submit', function (event) {
         if (!mail.validity.valid) {
             errorMail();
@@ -52,9 +52,9 @@ function validacionRegistro() {
             errorEdad();
             event.preventDefault();
         }
-        
+
         comprobarContras();
-        if(!correcto){
+        if (!correcto) {
             event.preventDefault();
         }
     });
@@ -125,9 +125,12 @@ function validacionRegistro() {
     });
 
     function errorEdad() {
+        if(edad.validity.valueMissing){
+            edadError.textContent = 'Debe introducir una edad.';
+        }
         //No cumple con el pattern
-        if (edad.validity.patternMismatch) {
-            edadError.textContent = 'Debe introducir una edad válida';
+        else if (edad.validity.patternMismatch) {
+            edadError.textContent = 'Debe introducir una edad válida.';
         }
         // Establece el estilo apropiado
         edadError.className = 'error active';
@@ -231,4 +234,41 @@ function validacionRegistro() {
             correcto = true;
         }
     }
+}
+
+
+function validacionLogin() {
+    const form = document.getElementById("login");
+    const mail = document.getElementById("email");
+    const mailError = document.querySelector('#email + span.error');
+
+    form.addEventListener('submit', function (event) {
+        if (!mail.validity.valid) {
+            errorMail();
+            event.preventDefault();
+        }
+    });
+
+    mail.addEventListener('input', function (event) {
+        if (mail.validity.valid) {
+            mailError.innerHTML = '';
+            mailError.className = 'error';
+        } else {
+            errorMail();
+        }
+    });
+
+    function errorMail() {
+        //Campo vacío
+        if (mail.validity.valueMissing) {
+            mailError.textContent = 'Debe introducir una dirección de correo electrónico.';
+            //No cumple los requisitos del campo email
+        } else if (mail.validity.typeMismatch) {
+            mailError.textContent = 'El valor introducido debe ser una dirección de correo electrónico ';
+            //Datos demasiado cortos
+        }
+        // Establece el estilo apropiado
+        mailError.className = 'error active';
+    }
+
 }

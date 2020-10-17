@@ -103,8 +103,7 @@ body{
     transition: all 0.2s ease;
 }
 
-
-/*------------------------------FORMULARIO LOGIN*/
+/*------------------------------FORMULARIO COMUN*/
 @keyframes entrada{
     from {
         right: 100%;
@@ -114,8 +113,16 @@ body{
         right: 0%;
     }
 }
+form input:focus{
+    border: 2px solid black;
+}
 
-form[name=login]{
+form h1{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+form {
     padding: 20px;
     border-radius: 20px;
     border: solid 2px black;
@@ -128,71 +135,24 @@ form[name=login]{
     position: relative;
 }
 
+/*------------------------------FORMULARIO LOGIN*/
 form[name=login] input{
     width: 100%;
 }
-form[name=login] input:focus{
-    border: 2px solid black;
-}
 
-form[name=login] h1{
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-}
 form[name=login] p{
     text-align: center;
 }
 
 /*------------------------------FORMULARIO ENCUESTA*/
-
-form[name=encuesta]{
-    padding: 20px;
-    border-radius: 20px;
-    border: solid 2px black;
-
-    margin-top:50px;
-    margin-bottom:50px;
-
-    animation-duration: 2s;
-    animation-name: entrada;
-    position: relative;
-}
-
-form[name=encuesta] input:focus{
-    border: 2px solid black;
-}
-
-form[name=encuesta] h1{
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-}
-
 .ancho100{
     width: 100%;
 }
-
+fieldset{
+    border: 2px solid white;
+}
 /*------------------------------FORMULARIO CRUD*/
-form[name=crud]{
-    padding: 20px;
-    border-radius: 20px;
-    border: solid 2px black;
 
-    margin-top:50px;
-    margin-bottom:50px;
-
-    animation-duration: 2s;
-    animation-name: entrada;
-    position: relative;
-}
-
-form[name=crud] input:focus{
-    border: 2px solid black;
-}
-
-form[name=crud] h1{
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-}
 fieldset.crud input{
     width: 100%;
 }
@@ -209,11 +169,11 @@ a[name="IrArriba"] input{
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^VALIDACION ERRORES^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-
+/*
 input:invalid{
     border-color: #ff6f69;
 }
-
+*/
 .error {
     width: 100%;
     font-size: 80%;

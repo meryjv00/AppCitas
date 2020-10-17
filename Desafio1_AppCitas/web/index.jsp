@@ -13,9 +13,10 @@
         <link rel="stylesheet" href="css/estilos.css">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="img/logo4.png">
-
+        <script src="js/validacion.js"></script>
+        
     </head>
-    <body>
+    <body onload="validacionLogin()">
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
@@ -24,12 +25,12 @@
         </header>
         <main class="row">
             <div class="col-m-4"></div>
-            <form name="login" id="login" action="controlador.jsp" class="col-m-4"> 
+            <form name="login" id="login" action="controlador.jsp" class="col-m-4" novalidate> 
                 <h1>LOGIN</h1>
                 <hr>
                 <p>
                     <label for="email">
-                        <input type="email" name="email" id="email" placeholder="Introduce tu email"/>
+                        <input type="email" name="email" id="email" placeholder="Introduce tu email" required/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>

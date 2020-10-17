@@ -89,9 +89,12 @@
                 String dni = request.getParameter("dni");
                 String apodo = request.getParameter("apodo");
                 String pass1 = request.getParameter("psswd");
-                //String pass2 = request.getParameter("psswd2");
                 String tfno = request.getParameter("tfno");
                 int edad = Integer.parseInt(request.getParameter("edad"));
+                if (tfno == null) {
+                    tfno = "";
+                }
+                
                 Usuario u = new Usuario(email, dni, apodo, pass1, tfno, edad, false, false);
                 ConexionEstatica.nueva();
                 if (ConexionEstatica.insertarUsuario(u)) {
@@ -176,13 +179,13 @@
                 String mensaje = "Nueva contraseña: " + az;
                 String asunto = "Contraseña olvidada";
                 email.enviarCorreo(de, clave, para, mensaje, asunto);
-                
+
                 //Asignar nueva contraseña al usuario
                 ConexionEstatica.nueva();
-                ConexionEstatica.modificarClave(para,az);
+                ConexionEstatica.modificarClave(para, az);
                 ConexionEstatica.cerrarBD();
                 response.sendRedirect("Vistas/mandado.jsp");
-                
+
             }
         %>
     </body>
