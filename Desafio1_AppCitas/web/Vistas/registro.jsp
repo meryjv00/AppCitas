@@ -76,7 +76,25 @@
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
-                <input type="submit" name="Registrar" value="Confirmar" class="boton"/>
+                <p>
+
+                <div class="row">
+                    <div class="col-m-3"></div>
+                    <div class="col-m-6">
+                        <canvas id="captcha"></canvas>  
+                    </div>
+                    <div class="col-m-3">
+                        <input type="button" id="refresh" value="Recargar" onclick="captcha();" class="boton"/>  
+                    </div>
+                </div>
+
+                <p>
+                    <input type="text" id="txtInput"/>
+                    <input id="button1" type="button" value="Comprobar" onclick="validCaptcha('txtInput');" class="boton"/>
+                    <span class="error" id="mensajeCaptcha"></span>                     
+                </p>
+                
+                <p><input type="submit" name="Registrar" value="Confirmar" class="boton"/></p>
                 <hr>
                 <p><a href="../index.jsp"><input type="button" name="Volver" value="Volver" class="boton"/></a></p>
             </form>

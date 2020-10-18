@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var code = '';
+var captchaCorrecto = false;
 
 function validacionRegistro() {
     //---------------------------VARIABLES
@@ -24,6 +26,8 @@ function validacionRegistro() {
     const tfnoError = document.querySelector('#tfno + span.error');
     const edadError = document.querySelector('#edad + span.error');
 
+    //-----------------------------DIBUJE CAPTCHA
+    captcha();
     //-----------------------------FORMULARIO SUBMIT
     var correcto;
 
@@ -56,6 +60,16 @@ function validacionRegistro() {
         comprobarContras();
         if (!correcto) {
             event.preventDefault();
+        }
+
+        if (!captchaCorrecto) {
+            event.preventDefault();
+            captcha();
+            var captchaMensaje = document.getElementById("mensajeCaptcha");
+            captchaMensaje.innerHTML = "Captcha incorrecto.";
+            captchaMensaje.className = 'error active';
+            var txt = document.getElementById("txtInput");
+            txt.value = '';
         }
     });
 
@@ -225,7 +239,7 @@ function validacionRegistro() {
         var c1 = contra.value;
         var c2 = contra2.value;
         if (c1 != c2) {
-            contraError2.textContent = 'Las contraseñas no coinciden';
+            contraError2.textContent = 'Las contraseñas no coinciden.';
             contraError2.className = 'error active';
             correcto = false;
         } else {
@@ -264,7 +278,7 @@ function validacionLogin() {
             mailError.textContent = 'Debe introducir una dirección de correo electrónico.';
             //No cumple los requisitos del campo email
         } else if (mail.validity.typeMismatch) {
-            mailError.textContent = 'El valor introducido debe ser una dirección de correo electrónico ';
+            mailError.textContent = 'El valor introducido debe ser una dirección de correo electrónico.';
             //Datos demasiado cortos
         }
         // Establece el estilo apropiado
@@ -274,6 +288,88 @@ function validacionLogin() {
 
 }
 
+//-----------------------------CAPTCHA
+function captcha() {
+    var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+    var i;
+    for (i = 0; i < 6; i++) {
+        var a = alpha[Math.floor(Math.random() * alpha.length)];
+        var b = alpha[Math.floor(Math.random() * alpha.length)];
+        var c = alpha[Math.floor(Math.random() * alpha.length)];
+        var d = alpha[Math.floor(Math.random() * alpha.length)];
+        var e = alpha[Math.floor(Math.random() * alpha.length)];
+        var f = alpha[Math.floor(Math.random() * alpha.length)];
+        var g = alpha[Math.floor(Math.random() * alpha.length)];
+    }
+    code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f + ' ' + g;
+    creaIMG(code);
+}
+
+function validCaptcha(txtInput) {
+    var captchaMensaje = document.getElementById("mensajeCaptcha");
+    var botonRefrescar = document.getElementById("refresh");
+    var txt = document.getElementById("txtInput");
+
+    var string1 = removeSpaces(code);
+    var string2 = removeSpaces(document.getElementById(txtInput).value);
+
+    if (string1 === string2) {
+        captchaMensaje.innerHTML = "Captcha correcto.";
+        captchaMensaje.className = 'error';
+        captchaCorrecto = true;
+        botonRefrescar.style.visibility = 'hidden';
+    } else {
+        captchaMensaje.innerHTML = "Captcha incorrecto.";
+        captchaMensaje.className = 'error active';
+        txt.value = '';
+        captcha();
+    }
+}
+function removeSpaces(string) {
+    return string.split(' ').join('');
+}
+
+function creaIMG(texto) {
+    var ctxCanvas = document.getElementById('captcha').getContext('2d');
+    var fontSize = "30px";
+    var fontFamily = "Arial";
+    var width = 250;
+    var height = 50;
+    //tamaño
+    ctxCanvas.canvas.width = width;
+    ctxCanvas.canvas.height = height;
+    //color de fondo
+    ctxCanvas.fillStyle = "whitesmoke";
+    ctxCanvas.fillRect(0, 0, width, height);
+    //puntos de distorsión
+    ctxCanvas.setLineDash([7, 10]);
+    ctxCanvas.lineDashOffset = 5;
+    ctxCanvas.beginPath();
+    var line;
+    for (var i = 0; i < (width); i++) {
+        line = i * 5;
+        ctxCanvas.moveTo(line, 0);
+        ctxCanvas.lineTo(0, line);
+    }
+    ctxCanvas.stroke();
+    //formato texto
+    ctxCanvas.direction = 'ltr';
+    ctxCanvas.font = fontSize + " " + fontFamily;
+    //texto posicion
+    var x = (width / 9);
+    var y = (height / 3) * 2;
+    //color del borde del texto
+    ctxCanvas.strokeStyle = "black";
+    ctxCanvas.strokeText(texto, x, y);
+    //color del texto
+    ctxCanvas.fillStyle = "black";
+    ctxCanvas.fillText(texto, x, y);
+}
+
+
+
+
+//-----------------------------BARRA PROGRESO
 function avanzar() {
     var elem = document.getElementById("progreso");
     var width = 1;
