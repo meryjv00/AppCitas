@@ -201,3 +201,15 @@ input:invalid{
 .escondido{
     visibility: hidden;
 }
+/*----------------------------------------*/
+#menu{
+    border: 2px solid black;
+    /*position: fixed;*/
+}
+#menu a{
+    text-decoration: none;
+    color:black;
+}
+#menu a:hover{
+    font-size: 20px;
+}

@@ -19,7 +19,7 @@
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
-                <img src="../img/logo4.png" class="imagenLogo"/>
+                <a href="inicio.jsp"><img src="../img/logo4.png" class="imagenLogo"/></a>
             </div>
         </header>
         <main class="row">
