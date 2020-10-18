@@ -278,13 +278,16 @@ function avanzar() {
     var elem = document.getElementById("progreso");
     var width = 1;
     var id = setInterval(frame, 100);
+    var boton = document.getElementById("ir");
+
     function frame() {
         if (width >= 100) {
             clearInterval(id);
+            boton.style.visibility = 'visible';
         } else {
             width++;
             elem.style.width = width + '%';
-            elem.innerHTML = width * 1  + '%';
+            elem.innerHTML = width * 1 + '%';
         }
     }
 }

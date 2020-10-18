@@ -30,7 +30,7 @@
                     <div id="progreso"></div>
                 </div>
                 <p>Cargando personas compatibles...</p>
-                <input type="submit" name="cargarPersonasCompatibles" value="Ir" class="boton "> 
+                <input type="submit" name="cargarPersonasCompatibles" id="ir" value="Ir" class="boton escondido"> 
             </form>
             <div class="col-m-4"></div>
         </main>
