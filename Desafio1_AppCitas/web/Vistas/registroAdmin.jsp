@@ -22,8 +22,8 @@
             </div>
         </header>
         <main class="row registro">
-            <div class="col-m-4"></div>
-            <form name="login" action="../controladorAdmin.jsp"class="col-m-4" > 
+            <div class="col-m-3"></div>
+            <form name="login" action="../controladorAdmin.jsp"class="col-m-6" > 
                 <h1>Registra un usuario:</h1>
                 <p>
                     <label for="email">
@@ -78,7 +78,7 @@
                 <a href="CRUDusuarios.jsp"><input type="button" value="Volver" class="boton"></a>
             </form>
 
-            <div class="col-m-4"></div>
+            <div class="col-m-3"></div>
         </main>
         <footer>
             <p>© María Juan Viñas, 2020</p>

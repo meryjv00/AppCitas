@@ -23,8 +23,8 @@
             </div>
         </header>
         <main class="row">
-            <div class="col-m-4"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-4"> 
+            <div class="col-m-3"></div>
+            <form name="login" action="../controlador.jsp" class="col-m-6"> 
                 <%
                     Usuario u = (Usuario) session.getAttribute("usuario");
                     String apodo = u.getApodo();
@@ -47,9 +47,16 @@
                     </div>
                 </div>
                 <hr>
+                <%
+                    if (u.sizeRoles() == 2) {
+                %>
+                <p><input type="submit" name="volverAdmin" value="Volver" class="boton"/></p>
+                <%
+                    }
+                %>
                 <input type="submit" name="CerrarSesion" value="Cerrar Sesión" class="boton"/>
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3"></div>
         </main>
         <footer class="index">
             <p>© María Juan Viñas, 2020</p>

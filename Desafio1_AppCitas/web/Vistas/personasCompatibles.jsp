@@ -24,8 +24,8 @@
             </div>
         </header>
         <div class="row">
-            <div class="col-m-3"></div>
-            <div class="col-m-6">
+            <div class="col-m-2"></div>
+            <div class="col-m-8">
                 <div class="row" id="menu">
                     <div class="col-m-3">
                         <a href="">Ver amigos</a>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-m-3"></div>
+            <div class="col-m-2"></div>
         </div>
         <main class="row">
             <div class="col-m-2"></div>

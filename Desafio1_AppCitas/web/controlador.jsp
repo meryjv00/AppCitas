@@ -166,6 +166,11 @@
                 response.sendRedirect("index.jsp");
             }
 
+            //Lleva a elegir admin
+            if(request.getParameter("volverAdmin")!= null){
+                response.sendRedirect("Vistas/elegirAdmin.jsp");
+            }
+            
             //Enviar email
             if (request.getParameter("EnviarEmail") != null) {
                 int az = (int) (Math.random() * 99999);

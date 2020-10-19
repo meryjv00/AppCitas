@@ -24,8 +24,8 @@
         </header>
 
         <main class="row">
-            <div class="col-m-4"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-4">
+            <div class="col-m-3"></div>
+            <form name="login" action="../controlador.jsp" class="col-m-6">
                 <%
                     Usuario u = (Usuario) session.getAttribute("usuario");
                     String apodo = u.getApodo();
@@ -37,7 +37,7 @@
                 <hr>
                 <p><input type="submit" name="cerrarSesion" value="Cerrar sesión" class="boton"></p>
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3"></div>
         </main>
 
         <footer class="index">

@@ -24,8 +24,8 @@
             </div>
         </header>
         <main class="row registro">
-            <div class="col-m-4"></div>
-            <form name="login" id="registro" action="../controlador.jsp" class="col-m-4" novalidate> 
+            <div class="col-m-3"></div>
+            <form name="login" id="registro" action="../controlador.jsp" class="col-m-6" novalidate> 
                 <h1>Registrate</h1>
                 <p>
                     <label for="email">
@@ -98,7 +98,7 @@
                 <hr>
                 <p><a href="../index.jsp"><input type="button" name="Volver" value="Volver" class="boton"/></a></p>
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3"></div>
         </main>
         <footer>
             <p>© María Juan Viñas, 2020</p>

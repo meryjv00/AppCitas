@@ -22,8 +22,8 @@
             </div>
         </header>
         <main class="row registro">
-            <div class="col-m-4"></div>
-            <form name="encuesta" action="../controlador.jsp" class="col-m-4"> 
+            <div class="col-m-3"></div>
+            <form name="encuesta" action="../controlador.jsp" class="col-m-6"> 
                 <h1>Rellena la encuesta inicial</h1>
 
                 <fieldset>
@@ -67,7 +67,7 @@
                 <input type="submit" name="cerrarSesion" value="Cerrar sesión" class="boton ancho100">
 
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3"></div>
         </main>
         <footer>
             <p>© María Juan Viñas, 2020</p>

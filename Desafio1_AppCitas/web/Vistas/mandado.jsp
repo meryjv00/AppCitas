@@ -22,12 +22,12 @@
             </div>
         </header>
         <main class="row">
-            <div class="col-m-4"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-4"> 
+            <div class="col-m-3"></div>
+            <form name="login" action="../controlador.jsp" class="col-m-6"> 
                 <h1>Correo enviado!</h1>
                 <input type="submit" name="Volver" value="Volver" class="boton"/>
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3"></div>
         </main>
         <footer class="index">
             <p>© María Juan Viñas, 2020</p>
