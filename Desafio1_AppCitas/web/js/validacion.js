@@ -164,8 +164,11 @@ function validacionRegistro() {
     });
 
     function errorTfno() {
+        if(tfno.validity.valueMissing){
+            tfnoError.textContent = 'Debe introducir un teléfono.';
+        }
         //No cumple con el pattern
-        if (tfno.validity.patternMismatch) {
+        else if (tfno.validity.patternMismatch) {
             tfnoError.textContent = 'El valor introducido debe cumplir este patrón: 000-000-000';
         }
         // Establece el estilo apropiado

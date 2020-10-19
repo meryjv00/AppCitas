@@ -65,7 +65,7 @@
                 <p>
                     <label for="tfno">
                         <span>Introduce tu teléfono: </span>
-                        <input type="text" name="tfno" id="tfno" pattern="^[0-9]{3}-[0-9]{3}-[0-9]{3}$"/>
+                        <input type="text" name="tfno" id="tfno" pattern="^[0-9]{3}-[0-9]{3}-[0-9]{3}$" required/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
                 </p>
