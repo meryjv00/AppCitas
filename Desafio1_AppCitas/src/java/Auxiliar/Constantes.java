@@ -18,7 +18,7 @@ public class Constantes {
     public static String rutaServidor = "/Perfiles";
     public static String tabla_usuarios = "usuarios";
     public static String tabla_roles = "roles";
-    public static String tabla_asignacion_roles = "asignacionRol";
+    public static String tabla_asignacion_roles = "asignacionrol";
     public static String tabla_preferencias = "preferencias";
-    public static String tabla_asignacion_preferencias = "asignacionPreferencias";
+    public static String tabla_asignacion_preferencias = "asignacionpreferencias";
 }
