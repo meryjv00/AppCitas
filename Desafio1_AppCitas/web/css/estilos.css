@@ -213,3 +213,14 @@ input:invalid{
 #menu a:hover{
     font-size: 20px;
 }
+
+/*---------------PERSONAS AFINES-------------------------*/
+.persona{
+    border-radius: 20px;
+    border: solid 2px black;
+
+}
+
+form[id="personasAfines"]{
+    background-color: #7c748c;
+}

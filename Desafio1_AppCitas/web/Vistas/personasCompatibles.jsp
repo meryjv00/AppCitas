@@ -46,18 +46,135 @@
         <main class="row">
             <div class="col-m-2"></div>
             <div class="col-m-8">
-                <form class="" action="../controlador.jsp">
+                <form name="login" id="personasAfines" action="../controlador.jsp">
+                    <h1>Usuarios afines</h1>
                     <%
+                        Usuario yo = (Usuario) session.getAttribute("usuario");
                         LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
                         if (usuariosAfines.size() >= 0) {
                             for (int i = 0; i < usuariosAfines.size(); i++) {
                                 Usuario u = (Usuario) usuariosAfines.get(i);
-                                
-                            }
-                        } else {
-                            %>
-                            <h1>Lo siento,no hemos encontrado personas afines a ti</h1>
+
+                    %>
+                    <div class="row">
+                        <div class="col-m-2"></div>
+                        <div class="col-m-8 persona">
+                            <div class="row">
+                                <h1><%=u.getApodo()%></h1>
+                            </div>
+                            <p class="subrayado">Gustos comunes:</p>
                             <%
+                                if (u.getRelacion().equals(yo.getRelacion())) {
+                            %>
+                            <div class="row">
+                                <div class="col-m-7">
+                                    <span>Relación:</span>
+                                </div>
+                                <div class="col-m-4">
+                                    <span><%=u.getRelacion()%></span>
+                                </div>
+                            </div>
+                            <%
+                                }
+                                if (u.isTieneHijos() == yo.isTieneHijos()) {
+                            %>
+                            <div class="row">
+                                <div class="col-m-7">
+                                    <span>Tiene hijos:</span>
+                                </div>
+                                <div class="col-m-4">
+                                    <%
+                                        String tieneHijos = "";
+                                        if (u.isTieneHijos() == false) {
+                                            tieneHijos = "No";
+                                        } else {
+                                            tieneHijos = "Sí";
+                                        }
+                                    %>
+                                    <span><%=tieneHijos%></span>
+                                </div>
+                            </div>
+                            <%
+                                }
+                                if (u.isQuiereHijos() == yo.isQuiereHijos()) {
+                            %>
+                            <div class="row">
+                                <div class="col-m-7">
+                                    <span>Quiere hijos:</span>
+                                </div>
+                                <div class="col-m-4">
+                                    <%
+                                        String quiereHijos = "";
+                                        if (u.isQuiereHijos() == false) {
+                                            quiereHijos = "No";
+                                        } else {
+                                            quiereHijos = "Sí";
+                                        }
+                                    %>
+                                    <span><%=quiereHijos%></span>
+                                </div>
+                            </div>
+                            <%
+                                }
+                                if (u.isInteresMujeres() == yo.isInteresMujeres()) {
+                            %>
+                            <div class="row">
+                                <div class="col-m-7">
+                                    <span>Interés por mujeres:</span>
+                                </div>
+                                <div class="col-m-4">
+                                    <%
+                                        String interesMujeres = "";
+                                        if (u.isInteresMujeres() == false) {
+                                            interesMujeres = "No";
+                                        } else {
+                                            interesMujeres = "Sí";
+                                        }
+                                    %>
+                                    <span><%=interesMujeres%></span>
+                                </div>
+                            </div>
+                            <%
+                                }
+                                if (u.isInteresHombres()== yo.isInteresHombres()) {
+                            %>
+                            <div class="row">
+                                <div class="col-m-7">
+                                    <span>Interés por hombres:</span>
+                                </div>
+                                <div class="col-m-4">
+                                    <%
+                                        String interesHomres = "";
+                                        if (u.isInteresHombres() == false) {
+                                            interesHomres = "No";
+                                        } else {
+                                            interesHomres = "Sí";
+                                        }
+                                    %>
+                                    <span><%=interesHomres%></span>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            %>
+                            <div class="row">
+                                <div class="col-m-6">
+                                    <input type="submit" name="<%=i%>" value="Me gusta" class="boton"/>
+                                </div>
+                                <div class="col-m-6">
+                                    <input type="submit" name="<%=i%>" value="Mandar mensaje" class="boton"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-m-2"></div>
+                    </div>
+                    <%
+                        }
+                    } else {
+                    %>
+                    <h1>Lo siento,no hemos encontrado personas afines a ti</h1>
+                    <%
                         }
                     %>
                 </form>
