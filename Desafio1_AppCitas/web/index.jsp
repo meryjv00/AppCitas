@@ -14,7 +14,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="img/logo4.png">
         <script src="js/validacion.js"></script>
-        
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+
     </head>
     <body onload="validacionLogin()">
         <header class="row">
@@ -41,12 +42,21 @@
                     </label>
                 </p>
                 <p><input type="submit" name="Aceptar" value="Entrar" class="boton"></p>
-
+                    <%
+                        int az = (int) (Math.random() * 3);
+                        if (az == 0) {
+                            session.setAttribute("captchaActivo", "Si");
+                    %>
+                <div class="row">
+                    <div class="col-m-3"></div>
+                    <div class="col-m-6 g-recaptcha" data-sitekey="6LelKtkZAAAAABYQiYE7QtJFtdqwF0aRzurS7xba"></div>
+                </div>
                 <%
+                    }
                     if (session.getAttribute("mensaje") != null) {
                         String mensaje = (String) session.getAttribute("mensaje");
                 %>
-                <span name="mensaje"><%=mensaje%></span>
+                <span name="mensaje" id="mensaje"><%=mensaje%></span>
                 <%
                     }
                 %>

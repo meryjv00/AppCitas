@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="Auxiliar.VerificarRecaptcha"%>
 <%@page import="Modelo.Email"%>
 <%@page import="Auxiliar.Bitacora"%>
 <%@page import="java.util.LinkedList"%>
@@ -22,10 +23,17 @@
             if (request.getParameter("Aceptar") != null) {
                 String email = request.getParameter("email");
                 String contra = request.getParameter("psswd");
+                boolean verificado = true;
+
+                //CAPTCHA GOOGLE
+                if (session.getAttribute("captchaActivo") != null) {
+                    String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+                    verificado = VerificarRecaptcha.verificar(gRecaptchaResponse);
+                }
 
                 ConexionEstatica.nueva();
                 Usuario u = ConexionEstatica.existeUsuario(email, contra);
-                if (u != null) {
+                if (u != null && verificado) {
                     session.setAttribute("usuario", u);
 
                     Bitacora.escribirBitacora("El usuario con correo " + u.getEmail() + " ha entrado en el sistema.");
@@ -78,7 +86,13 @@
                         }
                     }
                 } else {
-                    response.sendRedirect("Vistas/fracaso.jsp");
+                    if (session.getAttribute("captchaActivo") != null) {
+                        session.setAttribute("mensaje", "Captcha no válido");
+                    } else {
+                        session.setAttribute("mensaje", "Usuario o contraseña incorrectos");
+                    }
+                    session.removeAttribute("captchaActivo");
+                    response.sendRedirect("index.jsp");
                 }
             }
 
@@ -251,7 +265,7 @@
                 //+++++
                 response.sendRedirect("Vistas/perfil.jsp");
             }
-            
+
             //ENTRAR COMO ADMINISTRADOR: CRUD
             {
                 if (request.getParameter("entrarAdmin") != null) {

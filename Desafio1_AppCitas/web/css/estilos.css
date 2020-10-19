@@ -237,3 +237,8 @@ input:invalid{
     border: solid 2px black;
     background-color: rgb(170, 155, 191);
 }
+
+.centrar{
+    display: block;
+    margin: auto;
+}
