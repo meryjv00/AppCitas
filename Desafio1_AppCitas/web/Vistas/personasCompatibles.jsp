@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="Modelo.ConexionEstatica"%>
 <%@page import="Modelo.Usuario"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,6 +16,7 @@
         <link rel="stylesheet" href="../css/estilos.css">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="../img/logo4.png">
+        <script src="../js/otro.js"></script>
     </head>
     <body>
         <a name="arriba"></a>
@@ -188,7 +190,18 @@
                             %>
                             <div class="row">
                                 <div class="col-m-6">
-                                    <input type="submit" name="<%=i%>" value="Me gusta" class="boton"/>
+                                    <%
+                                        ConexionEstatica.nueva();
+                                        boolean meGusta = ConexionEstatica.comprobarMeGusta(yo.getEmail(), u.getEmail());
+                                        ConexionEstatica.cerrarBD();
+                                        String txt = "";
+                                        if (meGusta) {
+                                            txt = "No me gusta";
+                                        } else {
+                                            txt = "Me gusta";
+                                        }
+                                    %>
+                                    <input type="submit" name="<%=i%>" id="megusta" value="<%=txt%>" class="boton" />
                                 </div>
                                 <div class="col-m-6">
                                     <input type="submit" name="<%=i%>" value="Enviar mensaje" class="boton"/>

@@ -293,6 +293,44 @@
                 response.sendRedirect("Vistas/elegirAdmin.jsp");
             }
 
+            //Añadir como amigos - enviar mensaje
+            if (session.getAttribute("usuariosAfines") != null) {
+                Usuario u = (Usuario) session.getAttribute("usuario");
+                LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
+                String pos = "", accion = "";
+                int posElegida = 0;
+                if (usuariosAfines.size() >= 0) {
+                    for (int i = 0; i < usuariosAfines.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+
+                    Usuario usu = (Usuario) usuariosAfines.get(posElegida);
+                    ConexionEstatica.nueva();
+
+                    //Añadir como q me gusta
+                    if (accion.equals("Me gusta")) {
+                        ConexionEstatica.meGusta(u.getEmail(), usu.getEmail());
+                        response.sendRedirect("Vistas/personasCompatibles.jsp");
+                    }
+                    //Borrar como q me gusta
+                    if (accion.equals("No me gusta")) {
+                        ConexionEstatica.noMeGusta(u.getEmail(), usu.getEmail());
+                        response.sendRedirect("Vistas/personasCompatibles.jsp");
+                    }
+                    //Enviar mensaje
+                    if (accion.equals("Enviar mensaje")) {
+
+                        response.sendRedirect("Vistas/personasCompatibles.jsp");
+                    }
+
+                    ConexionEstatica.cerrarBD();
+                }
+
+            }
 
         %>
     </body>

@@ -346,4 +346,34 @@ public class ConexionEstatica {
         }
 
     }
+
+    public static void meGusta(String emailmio, String emailusu) {
+        try {
+            String sentencia = "INSERT INTO " + Constantes.tabla_amigos + " VALUES('" + emailmio + "','" + emailusu + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+
+        } catch (SQLException ex) {
+        }
+    }
+
+    public static void noMeGusta(String emailmio, String emailusu) {
+        try {
+            String sentencia = "DELETE FROM " + Constantes.tabla_amigos + " WHERE Email1 like '" + emailmio + "' AND Email2 like '" + emailusu + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+        } catch (SQLException ex) {
+        }
+    }
+    
+    public static boolean comprobarMeGusta(String emailmio, String emailusu){
+        boolean amigos = false;
+        try {
+            String sentencia = "SELECT * FROM " + Constantes.tabla_amigos + " WHERE Email1 = '" + emailmio + "' AND Email2 = '" + emailusu + "'";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if(Conj_Registros.next()){
+                amigos = true;
+            }
+        } catch (SQLException ex) {
+        }
+        return amigos;
+    }
 }

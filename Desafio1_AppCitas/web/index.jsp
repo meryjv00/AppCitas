@@ -43,7 +43,9 @@
                 </p>
                 <p><input type="submit" name="Aceptar" value="Entrar" class="boton"></p>
                     <%
+                        session.removeAttribute("captchaActivo");
                         int az = (int) (Math.random() * 3);
+                        
                         if (az == 0) {
                             session.setAttribute("captchaActivo", "Si");
                     %>
