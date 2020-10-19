@@ -23,12 +23,12 @@
             </div>
         </header>
         <main class="row">
-            <div class="col-m-4"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-4"> 
+            <div class="col-m-3 col-l-4"></div>
+            <form name="login" action="../controlador.jsp" class="col-m-6 col-l-4"> 
                 <h1>Inicio de sesión incorrecto</h1>
                 <input type="submit" name="Volver" value="Volver" class="boton"/>
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3 col-l-4"></div>
         </main>
         <footer class="index">
             <p>© María Juan Viñas, 2020</p>

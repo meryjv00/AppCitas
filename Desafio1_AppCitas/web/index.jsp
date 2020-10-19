@@ -24,8 +24,8 @@
             </div>
         </header>
         <main class="row">
-            <div class="col-m-4"></div>
-            <form name="login" id="login" action="controlador.jsp" class="col-m-4" novalidate> 
+            <div class="col-m-3 col-l-4"></div>
+            <form name="login" id="login" action="controlador.jsp" class="col-m-6 col-l-4" novalidate> 
                 <h1>LOGIN</h1>
                 <hr>
                 <p>
@@ -55,7 +55,7 @@
                 <hr>
                 <a href="Vistas/olvidada.jsp">He olvidado la contraseña</a>
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3 col-l-4"></div>
         </main>
         <footer class="index">
             <p>© María Juan Viñas, 2020</p>

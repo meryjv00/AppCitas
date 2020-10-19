@@ -79,7 +79,7 @@ public class ConexionEstatica {
                         Conj_Registros.getBoolean("HaIniciado"));
                 //Le añadimos el rol/es
                 sentencia = "SELECT * FROM " + Constantes.tabla_roles + "," + Constantes.tabla_asignacion_roles
-                        + " WHERE asignacionRol.Email = '" + email + "' AND roles.Id = asignacionRol.Id";
+                        + " WHERE asignacionrol.Email = '" + email + "' AND roles.Id = asignacionrol.Id";
                 ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
                 while (Conj_Registros.next()) {
                     String rol = Conj_Registros.getString("roles.Descripcion");
@@ -133,7 +133,7 @@ public class ConexionEstatica {
         LinkedList roles = new LinkedList();
         try {
             String sentencia = "SELECT * FROM " + Constantes.tabla_roles + "," + Constantes.tabla_asignacion_roles
-                    + " WHERE asignacionRol.Email = '" + email + "' AND roles.Id = asignacionRol.Id";
+                    + " WHERE asignacionrol.Email = '" + email + "' AND roles.Id = asignacionrol.Id";
             ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
             while (Conj_Registros.next()) {
                 String rol = Conj_Registros.getString("Descripcion");

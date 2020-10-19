@@ -22,8 +22,8 @@
             </div>
         </header>
         <main class="row">
-            <div class="col-m-4"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-4"> 
+            <div class="col-m-3 col-l-4"></div>
+            <form name="login" action="../controlador.jsp" class="col-m-6 col-l-4"> 
                 <p>
                     <label for="email">
                         <span>Introduce tu email: </span>
@@ -35,7 +35,7 @@
                 <hr>
                 <a href="../index.jsp"><input type="button" name="Volver" value="Volver" class="boton"/></a>
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3 col-l-4"></div>
         </main>
         <footer class="index">
             <p>© María Juan Viñas, 2020</p>

@@ -19,12 +19,12 @@
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
-                <img src="../img/logo4.png" class="imagenLogo"/>
+                <a href="inicio.jsp"><img src="../img/logo4.png" class="imagenLogo"/></a>
             </div>
         </header>
         <main class="row">
-            <div class="col-m-4"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-4"> 
+            <div class="col-m-3 col-l-4"></div>
+            <form name="login" action="../controlador.jsp" class="col-m-6 col-l-4"> 
                 <h1>Loading</h1>
                 <div class="barraProgreso">
                     <div id="progreso"></div>
@@ -32,7 +32,7 @@
                 <p>Cargando personas compatibles...</p>
                 <input type="submit" name="cargarPersonasCompatibles" id="ir" value="Ir" class="boton escondido"> 
             </form>
-            <div class="col-m-4"></div>
+            <div class="col-m-3 col-l-4"></div>
         </main>
         <footer class="index">
             <p>© María Juan Viñas, 2020</p>
