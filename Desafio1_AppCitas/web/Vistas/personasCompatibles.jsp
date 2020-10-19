@@ -17,6 +17,7 @@
         <link rel="icon" type="image/png" href="../img/logo4.png">
     </head>
     <body>
+        <a name="arriba"></a>
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
@@ -24,24 +25,24 @@
             </div>
         </header>
         <div class="row">
-            <div class="col-m-2"></div>
-            <div class="col-m-8">
-                <div class="row" id="menu">
+            <div class="col-m-2 col-l-3"></div>
+            <div class="col-m-8 col-l-6">
+                <form name="login" class="row" id="menu" action="../controlador.jsp">
                     <div class="col-m-3">
-                        <a href="">Ver amigos</a>
+                        <input type="submit" name="verAmigos" value="Ver amigos" class="boton"/> 
                     </div>
                     <div class="col-m-3">
-                        <a href="">Ver mensajes</a>
+                        <input type="submit" name="verMensajes" value="Ver mensajes" class="boton"/> 
                     </div>
                     <div class="col-m-3">
-                        <a href="">Ver perfil</a>
+                        <input type="submit" name="verPerfil" value="Ver perfil" class="boton"/> 
                     </div>
                     <div class="col-m-3">
-                        <a href="inicio.jsp">Página inicio</a>
+                        <input type="submit" name="cerrarSesion" value="Cerrar Sesión" class="boton"/>
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="col-m-2"></div>
+            <div class="col-m-2 col-l-3"></div>
         </div>
         <main class="row">
             <div class="col-m-2"></div>
@@ -57,11 +58,9 @@
 
                     %>
                     <div class="row">
-                        <div class="col-m-2"></div>
-                        <div class="col-m-8 persona">
-                            <div class="row">
-                                <h1><%=u.getApodo()%></h1>
-                            </div>
+                        <div class="col-m-3 col-l-3"></div>
+                        <div class="col-m-6 col-l-6 persona">
+                            <h1><%=u.getApodo()%></h1>
                             <p class="subrayado">Gustos comunes:</p>
                             <%
                                 if (u.getRelacion().equals(yo.getRelacion())) {
@@ -73,6 +72,36 @@
                                 <div class="col-m-4">
                                     <span><%=u.getRelacion()%></span>
                                 </div>
+                            </div>
+                            <%
+                                }
+                                if (u.getDeporte() - 10 <= yo.getDeporte() && yo.getDeporte() <= u.getDeporte() + 10) {
+                            %>
+                            <div class="col-m-7">
+                                <span>Deporte:</span>
+                            </div>
+                            <div class="col-m-4">
+                                <span><%=u.getDeporte()%></span>
+                            </div>
+                            <%
+                                }
+                                if (u.getArte() - 10 <= yo.getArte() && yo.getArte() <= u.getArte() + 10) {
+                            %>
+                            <div class="col-m-7">
+                                <span>Arte:</span>
+                            </div>
+                            <div class="col-m-4">
+                                <span><%=u.getArte()%></span>
+                            </div>
+                            <%
+                                }
+                                if (u.getPolitica() - 10 <= yo.getPolitica() && yo.getPolitica() <= u.getPolitica() + 10) {
+                            %>
+                            <div class="col-m-7">
+                                <span>Política:</span>
+                            </div>
+                            <div class="col-m-4">
+                                <span><%=u.getPolitica()%></span>
                             </div>
                             <%
                                 }
@@ -136,7 +165,7 @@
                             </div>
                             <%
                                 }
-                                if (u.isInteresHombres()== yo.isInteresHombres()) {
+                                if (u.isInteresHombres() == yo.isInteresHombres()) {
                             %>
                             <div class="row">
                                 <div class="col-m-7">
@@ -162,13 +191,14 @@
                                     <input type="submit" name="<%=i%>" value="Me gusta" class="boton"/>
                                 </div>
                                 <div class="col-m-6">
-                                    <input type="submit" name="<%=i%>" value="Mandar mensaje" class="boton"/>
+                                    <input type="submit" name="<%=i%>" value="Enviar mensaje" class="boton"/>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="col-m-2"></div>
+                        <div class="col-m-3"></div>
                     </div>
+                    <br>
                     <%
                         }
                     } else {
@@ -177,11 +207,13 @@
                     <%
                         }
                     %>
+                    <hr>
+                    <a href="#arriba"><input type="button" value="Ir arriba" class="boton"/></a>
                 </form>
             </div>
-            <div class="col-m-2"></div>
+            <div class="col-m-2 col-l-2"></div>
         </main>
-        <footer class="index">
+        <footer>
             <p>© María Juan Viñas, 2020</p>
         </footer>
     </body>

@@ -102,22 +102,6 @@
                 ConexionEstatica.cerrarBD();
             }
 
-            //CIERRA SESIÓN
-            if (request.getParameter("CerrarSesion") != null) {
-                session.invalidate();
-                response.sendRedirect("index.jsp");
-            }
-
-            //ENTRAR COMO ADMINISTRADOR: CRUD
-            if (request.getParameter("entrarAdmin") != null) {
-                response.sendRedirect("Vistas/CRUDusuarios.jsp");
-            }
-
-            //ENTRAR COMO USUARIO: INICIO
-            if (request.getParameter("entrarUsu") != null) {
-                response.sendRedirect("Vistas/inicio.jsp");
-            }
-
             //ENCUESTA PREFERENCIAS
             if (request.getParameter("Rellenar") != null) {
                 Usuario u = (Usuario) session.getAttribute("usuario");
@@ -155,22 +139,6 @@
 
             }
 
-            //Cerrar sesion
-            if (request.getParameter("cerrarSesion") != null) {
-                session.invalidate();
-                response.sendRedirect("index.jsp");
-            }
-
-            //LLeva a index
-            if (request.getParameter("Volver") != null) {
-                response.sendRedirect("index.jsp");
-            }
-
-            //Lleva a elegir admin
-            if(request.getParameter("volverAdmin")!= null){
-                response.sendRedirect("Vistas/elegirAdmin.jsp");
-            }
-            
             //Enviar email
             if (request.getParameter("EnviarEmail") != null) {
                 int az = (int) (Math.random() * 99999);
@@ -230,8 +198,6 @@
                 //Buscar usuarios afines
                 for (int i = 0; i < usuariosPreferencias.size(); i++) {
                     cont = 0;
-                    int max = 0;
-                    int min = 0;
                     Usuario usuAfin = (Usuario) usuariosPreferencias.get(i);
                     if (relacion.equals(usuAfin.getRelacion())) {
                         cont++;
@@ -248,23 +214,13 @@
                     if (interesHombres == usuAfin.isInteresHombres()) {
                         cont++;
                     }
-
-                    int deporte2 = usuAfin.getDeporte();
-                    max = deporte2 + 10;
-                    min = deporte2 - 10;
-                    if (min <= deporte && deporte <= max) {
+                    if (usuAfin.getDeporte() - 10 <= deporte && deporte <= usuAfin.getDeporte() + 10) {
                         cont++;
                     }
-                    int arte2 = usuAfin.getArte();
-                    max = arte2 + 10;
-                    min = arte2 - 10;
-                    if (min <= arte && arte <= max) {
+                    if (usuAfin.getArte() - 10 <= arte && arte <= usuAfin.getArte() + 10) {
                         cont++;
                     }
-                    int politica2 = usuAfin.getPolitica();
-                    max = politica2 + 10;
-                    min = politica2 - 10;
-                    if (min <= politica && politica <= max) {
+                    if (usuAfin.getPolitica() - 10 <= politica && politica <= usuAfin.getPolitica() + 10) {
                         cont++;
                     }
 
@@ -277,6 +233,53 @@
                 session.setAttribute("usuariosAfines", usuariosAfines);
                 response.sendRedirect("Vistas/personasCompatibles.jsp");
             }
+
+            //IR A VER AMIGOS
+            if (request.getParameter("verAmigos") != null) {
+                //+++++
+                response.sendRedirect("Vistas/amigos.jsp");
+            }
+
+            //IR A VER MENSAJES
+            if (request.getParameter("verMensajes") != null) {
+                //+++++
+                response.sendRedirect("Vistas/mensajes.jsp");
+            }
+
+            //IR A VER PERFIL
+            if (request.getParameter("verPerfil") != null) {
+                //+++++
+                response.sendRedirect("Vistas/perfil.jsp");
+            }
+            
+            //ENTRAR COMO ADMINISTRADOR: CRUD
+            {
+                if (request.getParameter("entrarAdmin") != null) {
+                    response.sendRedirect("Vistas/CRUDusuarios.jsp");
+                }
+            }
+
+            //ENTRAR COMO USUARIO: INICIO
+            if (request.getParameter("entrarUsu") != null) {
+                response.sendRedirect("Vistas/inicio.jsp");
+            }
+            //Cerrar sesion
+            if (request.getParameter("cerrarSesion") != null) {
+                session.invalidate();
+                response.sendRedirect("index.jsp");
+            }
+
+            //LLeva a index
+            if (request.getParameter("Volver") != null) {
+                response.sendRedirect("index.jsp");
+            }
+
+            //Lleva a elegir admin
+            if (request.getParameter("volverAdmin") != null) {
+                response.sendRedirect("Vistas/elegirAdmin.jsp");
+            }
+
+
         %>
     </body>
 </html>

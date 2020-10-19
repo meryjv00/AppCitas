@@ -192,7 +192,7 @@ input:invalid{
 .error {
     width: 100%;
     font-size: 80%;
-    background-color: #7c748c;
+    background-color: rgb(170, 155, 191);
     border-radius: 0 0 5px 5px ;
     box-sizing: border-box ;
 }
@@ -210,7 +210,7 @@ input:invalid{
 .barraProgreso div{
     height:24px;
     width:0;
-    background-color: #7c748c;
+    background-color: rgb(170, 155, 191);
     text-align: center;
 }
 
@@ -219,8 +219,9 @@ input:invalid{
 }
 /*----------------------------------------*/
 #menu{
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     /*position: fixed;*/
+    background-color: rgb(170, 155, 191);
 }
 #menu a{
     text-decoration: none;
@@ -234,9 +235,5 @@ input:invalid{
 .persona{
     border-radius: 20px;
     border: solid 2px black;
-
-}
-
-form[id="personasAfines"]{
-    background-color: #7c748c;
+    background-color: rgb(170, 155, 191);
 }

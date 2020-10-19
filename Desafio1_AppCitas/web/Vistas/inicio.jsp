@@ -54,7 +54,7 @@
                 <%
                     }
                 %>
-                <input type="submit" name="CerrarSesion" value="Cerrar Sesión" class="boton"/>
+                <input type="submit" name="cerrarSesion" value="Cerrar Sesión" class="boton"/>
             </form>
             <div class="col-m-3 col-l-4"></div>
         </main>
