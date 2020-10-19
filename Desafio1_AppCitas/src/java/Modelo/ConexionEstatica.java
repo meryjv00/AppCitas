@@ -363,17 +363,35 @@ public class ConexionEstatica {
         } catch (SQLException ex) {
         }
     }
-    
-    public static boolean comprobarMeGusta(String emailmio, String emailusu){
+
+    public static boolean comprobarMeGusta(String emailmio, String emailusu) {
         boolean amigos = false;
         try {
             String sentencia = "SELECT * FROM " + Constantes.tabla_amigos + " WHERE Email1 = '" + emailmio + "' AND Email2 = '" + emailusu + "'";
             ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
-            if(Conj_Registros.next()){
+            if (Conj_Registros.next()) {
                 amigos = true;
             }
         } catch (SQLException ex) {
         }
+        return amigos;
+    }
+
+    public static boolean sonAmigos(String emailmio, String emailusu) {
+        boolean amigos = false;
+        try {
+            String sentencia = "SELECT * FROM " + Constantes.tabla_amigos + " WHERE Email1 = '" + emailmio + "' AND Email2 = '" + emailusu + "'";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                sentencia = "SELECT * FROM " + Constantes.tabla_amigos + " WHERE Email1 = '" + emailusu + "' AND Email2 = '" + emailmio + "'";
+                ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+                if(Conj_Registros.next()){
+                    amigos = true;
+                }
+            }
+        } catch (SQLException ex) {
+        }
+
         return amigos;
     }
 }

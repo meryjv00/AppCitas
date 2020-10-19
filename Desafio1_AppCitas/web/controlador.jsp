@@ -37,7 +37,7 @@
                     session.setAttribute("usuario", u);
 
                     Bitacora.escribirBitacora("El usuario con correo " + u.getEmail() + " ha entrado en el sistema.");
-
+                    //Obtenemos todos los usuarios
                     LinkedList usuarios = ConexionEstatica.obtenerUsuarios();
                     for (int i = 0; i < usuarios.size(); i++) {
                         Usuario usu = (Usuario) usuarios.get(i);
@@ -58,8 +58,61 @@
                             usu.setInteresHombres((boolean) preferencias[7]);
                         }
                     }
-
                     session.setAttribute("usuarios", usuarios);
+
+                    //Buscar usuarios afines
+                    LinkedList usuariosPreferencias = new LinkedList();
+                    LinkedList usuariosAfines = new LinkedList();
+                    int cont = 0;
+
+                    //Añadimos a la LK usuariosPreferencias aquellos que han rellenado la encuesta y quitando
+                    // a el usuario que ha iniciado sesión
+                    for (int i = 0; i < usuarios.size(); i++) {
+                        Usuario usu = (Usuario) usuarios.get(i);
+                        if (usu.getRelacion() != null) {
+                            if (!usu.getEmail().equals(u.getEmail())) {
+                                usuariosPreferencias.add(usu);
+                            }
+                        }
+                    }
+
+                    //Buscar usuarios afines
+                    for (int i = 0; i < usuariosPreferencias.size(); i++) {
+                        cont = 0;
+                        Usuario usuAfin = (Usuario) usuariosPreferencias.get(i);
+                        if (u.getRelacion().equals(usuAfin.getRelacion())) {
+                            cont++;
+                        }
+                        if (u.isQuiereHijos() == usuAfin.isQuiereHijos()) {
+                            cont++;
+                        }
+                        if (u.isTieneHijos() == usuAfin.isTieneHijos()) {
+                            cont++;
+                        }
+                        if (u.isInteresMujeres() == usuAfin.isInteresMujeres()) {
+                            cont++;
+                        }
+                        if (u.isInteresHombres() == usuAfin.isInteresHombres()) {
+                            cont++;
+                        }
+                        if (usuAfin.getDeporte() - 10 <= u.getDeporte() && u.getDeporte() <= usuAfin.getDeporte() + 10) {
+                            cont++;
+                        }
+                        if (usuAfin.getArte() - 10 <= u.getArte() && u.getArte() <= usuAfin.getArte() + 10) {
+                            cont++;
+                        }
+                        if (usuAfin.getPolitica() - 10 <= u.getPolitica() && u.getPolitica() <= usuAfin.getPolitica() + 10) {
+                            cont++;
+                        }
+
+                        //Si tiene 5 cosas parecidas añadir a personas afines  5/8
+                        if (cont >= 5) {
+                            usuariosAfines.add(usuAfin);
+                        }
+                    }
+
+                    session.setAttribute("usuariosAfines", usuariosAfines);
+
                     ConexionEstatica.cerrarBD();
                     //Si tiene más de 2 roles es admin
                     if (u.sizeRoles() == 2) {
@@ -181,76 +234,23 @@
 
             //Ir a la pagina de personas afines
             if (request.getParameter("cargarPersonasCompatibles") != null) {
-                Usuario u = (Usuario) session.getAttribute("usuario");
-                LinkedList usuarios = (LinkedList) session.getAttribute("usuarios");
-                LinkedList usuariosPreferencias = new LinkedList();
-                LinkedList usuariosAfines = new LinkedList();
-                int cont = 0;
-
-                //Preferencias del usuario
-                String email = u.getEmail();
-                String relacion = u.getRelacion();
-                int deporte = u.getDeporte();
-                int arte = u.getArte();
-                int politica = u.getPolitica();
-                boolean quiereHijos = u.isQuiereHijos();
-                boolean tieneHijos = u.isTieneHijos();
-                boolean interesMujeres = u.isInteresMujeres();
-                boolean interesHombres = u.isInteresHombres();
-
-                //Añadimos a la LK usuariosPreferencias aquellos que han rellenado la encuesta y quitando
-                // a el usuario que ha iniciado sesión
-                for (int i = 0; i < usuarios.size(); i++) {
-                    Usuario usu = (Usuario) usuarios.get(i);
-                    if (usu.getRelacion() != null) {
-                        if (!usu.getEmail().equals(email)) {
-                            usuariosPreferencias.add(usu);
-                        }
-                    }
-                }
-
-                //Buscar usuarios afines
-                for (int i = 0; i < usuariosPreferencias.size(); i++) {
-                    cont = 0;
-                    Usuario usuAfin = (Usuario) usuariosPreferencias.get(i);
-                    if (relacion.equals(usuAfin.getRelacion())) {
-                        cont++;
-                    }
-                    if (quiereHijos == usuAfin.isQuiereHijos()) {
-                        cont++;
-                    }
-                    if (tieneHijos == usuAfin.isTieneHijos()) {
-                        cont++;
-                    }
-                    if (interesMujeres == usuAfin.isInteresMujeres()) {
-                        cont++;
-                    }
-                    if (interesHombres == usuAfin.isInteresHombres()) {
-                        cont++;
-                    }
-                    if (usuAfin.getDeporte() - 10 <= deporte && deporte <= usuAfin.getDeporte() + 10) {
-                        cont++;
-                    }
-                    if (usuAfin.getArte() - 10 <= arte && arte <= usuAfin.getArte() + 10) {
-                        cont++;
-                    }
-                    if (usuAfin.getPolitica() - 10 <= politica && politica <= usuAfin.getPolitica() + 10) {
-                        cont++;
-                    }
-
-                    //Si tiene 5 cosas parecidas añadir a personas afines  5/8
-                    if (cont >= 5) {
-                        usuariosAfines.add(usuAfin);
-                    }
-                }
-
-                session.setAttribute("usuariosAfines", usuariosAfines);
                 response.sendRedirect("Vistas/personasCompatibles.jsp");
             }
 
             //IR A VER AMIGOS
             if (request.getParameter("verAmigos") != null) {
-                //+++++
+                Usuario yo = (Usuario) session.getAttribute("usuario");
+                LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
+                LinkedList amigos = new LinkedList();
+                ConexionEstatica.nueva();
+                for (int i = 0; i < usuariosAfines.size(); i++) {
+                    Usuario u = (Usuario) usuariosAfines.get(i);
+                    if (ConexionEstatica.sonAmigos(yo.getEmail(), u.getEmail())) {
+                        amigos.add(u);
+                    }
+                }
+                ConexionEstatica.cerrarBD();
+                session.setAttribute("amigos", amigos);
                 response.sendRedirect("Vistas/amigos.jsp");
             }
 
@@ -267,10 +267,8 @@
             }
 
             //ENTRAR COMO ADMINISTRADOR: CRUD
-            {
-                if (request.getParameter("entrarAdmin") != null) {
-                    response.sendRedirect("Vistas/CRUDusuarios.jsp");
-                }
+            if (request.getParameter("entrarAdmin") != null) {
+                response.sendRedirect("Vistas/CRUDusuarios.jsp");
             }
 
             //ENTRAR COMO USUARIO: INICIO
@@ -321,7 +319,7 @@
                         ConexionEstatica.noMeGusta(u.getEmail(), usu.getEmail());
                         response.sendRedirect("Vistas/personasCompatibles.jsp");
                     }
-                    //Enviar mensaje
+                    //Enviar mensaje ++++++++
                     if (accion.equals("Enviar mensaje")) {
 
                         response.sendRedirect("Vistas/personasCompatibles.jsp");
