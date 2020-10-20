@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="../css/estilos.css">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body name="ajustar">
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">

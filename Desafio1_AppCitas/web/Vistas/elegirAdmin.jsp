@@ -15,7 +15,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="../img/logo4.png">
     </head>
-    <body>
+    <body name="ajustar">
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
