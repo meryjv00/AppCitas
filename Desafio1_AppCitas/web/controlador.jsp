@@ -265,23 +265,48 @@
             //Ver en detalle + enviar mensaje a amigo
             if (session.getAttribute("amigos") != null) {
                 LinkedList amigos = (LinkedList) session.getAttribute("amigos");
-                String pos = "", accion = "";
-                int posElegida = 0;
-                for (int i = 0; i < amigos.size(); i++) {
-                    pos = String.valueOf(i);
-                    if (request.getParameter(pos) != null) {
-                        accion = request.getParameter(pos).toString();
-                        posElegida = i;
+                if (amigos.size() > 0) {
+                    String pos = "", accion = "";
+                    int posElegida = 0;
+                    for (int i = 0; i < amigos.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+                    Usuario usu = (Usuario) amigos.get(posElegida);
+                    session.setAttribute("amigoSeleccionado", usu);
+                    if (accion.equals("Ver en detalle")) {
+                        response.sendRedirect("Vistas/detalleAmigo.jsp");
+                    }
+                    if (accion.equals("Enviar mensaje")) {
+                        response.sendRedirect("Vistas/enviarMensaje.jsp");
                     }
                 }
-                Usuario usu = (Usuario) amigos.get(posElegida);
-                session.setAttribute("amigoSeleccionado", usu);
-                if(accion.equals("Ver en detalle")){
-                    response.sendRedirect("Vistas/detalleAmigo.jsp");
+
+            }
+
+            if (request.getParameter("dejarSerAmigo") != null) {
+                Usuario amigo = (Usuario) session.getAttribute("amigoSeleccionado");
+                Usuario yo = (Usuario) session.getAttribute("usuario");
+                ConexionEstatica.nueva();
+                ConexionEstatica.noMeGusta(yo.getEmail(), amigo.getEmail());
+                
+                //Actualiza los amigos 
+                LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
+                LinkedList amigos = new LinkedList();
+                ConexionEstatica.nueva();
+                for (int i = 0; i < usuariosAfines.size(); i++) {
+                    Usuario u = (Usuario) usuariosAfines.get(i);
+                    if (ConexionEstatica.sonAmigos(yo.getEmail(), u.getEmail())) {
+                        amigos.add(u);
+                    }
                 }
-                if(accion.equals("Enviar mensaje")){
-                    response.sendRedirect("Vistas/enviarMensaje.jsp");
-                }
+                session.setAttribute("amigos", amigos);
+                
+                ConexionEstatica.cerrarBD();
+                response.sendRedirect("Vistas/amigos.jsp");
             }
 
             //IR A VER PERFIL

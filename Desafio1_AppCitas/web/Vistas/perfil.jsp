@@ -55,14 +55,14 @@
                         %>
                         <!--DATOS COMUNES-->
                         <fieldset>
-                            <legend>Mis datos</legend>
+                            <legend>Mis datos personales</legend>
                             <!--Correo electrónico: no editable-->
                             <div class="row">
                                 <div class="col-m-5">
                                     <span>Correo electrónico:</span>
                                 </div>
                                 <div class="col-m-7">
-                                    <input type="text" name="correo" value="<%=u.getEmail()%>" style="background-color: #B7CBBF" readonly/>
+                                    <input type="text" name="correo" value="<%=u.getEmail()%>" readonly/>
                                 </div>
                             </div>
                             <!--Dni no editable-->
@@ -71,7 +71,7 @@
                                     <span>Dni:</span>
                                 </div>
                                 <div class="col-m-7">
-                                    <input type="text" name="dni" value="<%=u.getDni()%>" style="background-color: #B7CBBF" readonly/>
+                                    <input type="text" name="dni" value="<%=u.getDni()%>" readonly/>
                                 </div>
                             </div>
                             <!--Apodo-->

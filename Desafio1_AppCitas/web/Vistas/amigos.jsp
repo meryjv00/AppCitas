@@ -90,7 +90,7 @@
             </form>
             <div class="col-m-2 col-l-2"></div>
         </main>
-        <footer class="index">
+        <footer>
             <p>© María Juan Viñas, 2020</p>
         </footer>
     </body>
