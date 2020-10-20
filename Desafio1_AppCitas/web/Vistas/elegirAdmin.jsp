@@ -40,7 +40,7 @@
             <div class="col-m-3 col-l-4"></div>
         </main>
 
-        <footer class="index">
+        <footer>
             <p>© María Juan Viñas, 2020</p>
         </footer>
 
