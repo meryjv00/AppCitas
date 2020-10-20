@@ -262,6 +262,27 @@
                 //+++++
                 response.sendRedirect("Vistas/mensajes.jsp");
             }
+            //Ver en detalle + enviar mensaje a amigo
+            if (session.getAttribute("amigos") != null) {
+                LinkedList amigos = (LinkedList) session.getAttribute("amigos");
+                String pos = "", accion = "";
+                int posElegida = 0;
+                for (int i = 0; i < amigos.size(); i++) {
+                    pos = String.valueOf(i);
+                    if (request.getParameter(pos) != null) {
+                        accion = request.getParameter(pos).toString();
+                        posElegida = i;
+                    }
+                }
+                Usuario usu = (Usuario) amigos.get(posElegida);
+                session.setAttribute("amigoSeleccionado", usu);
+                if(accion.equals("Ver en detalle")){
+                    response.sendRedirect("Vistas/detalleAmigo.jsp");
+                }
+                if(accion.equals("Enviar mensaje")){
+                    response.sendRedirect("Vistas/enviarMensaje.jsp");
+                }
+            }
 
             //IR A VER PERFIL
             if (request.getParameter("verPerfil") != null) {
@@ -323,7 +344,7 @@
                 ConexionEstatica.nueva();
                 ConexionEstatica.editarPreferenciasUsuario(u);
                 ConexionEstatica.cerrarBD();
-               
+
                 response.sendRedirect("index.jsp");
             }
 
@@ -390,7 +411,6 @@
 
             }
 
-            //Ver en detalle + enviar mensaje
 
         %>
     </body>
