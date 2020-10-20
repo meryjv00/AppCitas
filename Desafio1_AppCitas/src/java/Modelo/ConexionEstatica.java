@@ -385,7 +385,7 @@ public class ConexionEstatica {
             if (Conj_Registros.next()) {
                 sentencia = "SELECT * FROM " + Constantes.tabla_amigos + " WHERE Email1 = '" + emailusu + "' AND Email2 = '" + emailmio + "'";
                 ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
-                if(Conj_Registros.next()){
+                if (Conj_Registros.next()) {
                     amigos = true;
                 }
             }
@@ -393,5 +393,52 @@ public class ConexionEstatica {
         }
 
         return amigos;
+    }
+
+    public static void editarDatosUsuario(Usuario u) {
+        try {
+            String sentencia = "UPDATE " + Constantes.tabla_usuarios + " SET Apodo='" + u.getApodo() + "', "
+                    + "Telefono='" + u.getTelefono() + "', Edad = " + u.getEdad() + " WHERE Email = '" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+        } catch (SQLException ex) {
+        }
+    }
+
+    public static void editarPreferenciasUsuario(Usuario u) {
+        try {
+            //MODIFICAR relacion
+            String sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.getRelacion() + "' WHERE IdPref=1 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            //MODIFICAR deporte
+            sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.getDeporte() + "' WHERE IdPref=2 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            //MODIFICAR arte
+            sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.getArte() + "' WHERE IdPref=3 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            //MODIFICAR politica
+            sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.getPolitica() + "' WHERE IdPref=4 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            //MODIFICAR tiene hijos
+            sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.isTieneHijos() + "' WHERE IdPref=5 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            //MODIFICAR quiere hijos
+            sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.isQuiereHijos() + "' WHERE IdPref=6 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            //MODIFICAR interes en mujeres
+            sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.isInteresMujeres() + "' WHERE IdPref=7 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+            //MODIFICAR interes en hombres
+            sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
+                    + u.isInteresHombres()+ "' WHERE IdPref=8 AND Email='" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+        } catch (SQLException ex) {
+        }
     }
 }

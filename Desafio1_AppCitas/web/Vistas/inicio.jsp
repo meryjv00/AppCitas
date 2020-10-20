@@ -32,7 +32,7 @@
                 <h1>¡Hola de nuevo <%=apodo%>!</h1>
                 <div class="row">
                     <div class="col-m-6">
-                        <input type="submit" name="verPersonasCompatibles" value="Ver personas compatibles" class="boton"/> 
+                        <input type="submit" name="verPersonasCompatibles" value="Ver personas afines" class="boton"/> 
                     </div>
                     <div class="col-m-6">
                         <input type="submit" name="verAmigos" value="Ver amigos" class="boton"/> 

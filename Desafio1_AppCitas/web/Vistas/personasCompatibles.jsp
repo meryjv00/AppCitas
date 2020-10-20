@@ -58,8 +58,8 @@
 
                 %>
                 <div class="row">
-                    <div class="col-m-3 col-l-3"></div>
-                    <div class="col-m-6 col-l-6 cuadro">
+                    <div class="col-m-2 col-l-3"></div>
+                    <div class="col-m-8 col-l-6 cuadro">
                         <h1><%=u.getApodo()%></h1>
                         <p class="subrayado">Gustos comunes:</p>
                         <%

@@ -56,7 +56,7 @@ and open the template in the editor.
     .col-12 {width: 100%;}
 }
 
-@media only screen and (min-width: 1280px) 
+@media only screen and (min-width: 1400px) 
 {
     ul li {text-align: left;}
     .col-l-1 {width: 8.33%;}

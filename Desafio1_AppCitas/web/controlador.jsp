@@ -71,6 +71,7 @@
                         for (int i = 0; i < usuarios.size(); i++) {
                             Usuario usu = (Usuario) usuarios.get(i);
                             if (usu.getRelacion() != null) {
+                                //Para quitar a el usuario que inicia sesión
                                 if (!usu.getEmail().equals(u.getEmail())) {
                                     usuariosPreferencias.add(usu);
                                 }
@@ -267,9 +268,63 @@
                 response.sendRedirect("Vistas/perfil.jsp");
             }
 
-            //EDITAR PERFIL
-            if (request.getParameter("EditarPerfil") != null) {
-                //++++++++
+            //EDITAR DATOS
+            if (request.getParameter("EditarDatos") != null) {
+                Usuario u = (Usuario) session.getAttribute("usuario");
+                String apodo = request.getParameter("apodo");
+                String tfno = request.getParameter("tfno");
+                int edad = Integer.parseInt(request.getParameter("edad"));
+                u.setApodo(apodo);
+                u.setTelefono(tfno);
+                u.setEdad(edad);
+                session.setAttribute("usuario", u);
+                ConexionEstatica.nueva();
+                ConexionEstatica.editarDatosUsuario(u);
+                ConexionEstatica.cerrarBD();
+                response.sendRedirect("Vistas/perfil.jsp");
+            }
+            //EDITAR PREFERENCIAS
+            //NO CAMBIAR PREFERENCIAS YA Q CAMBIARIAN USUARIOS AFINES Y POR LO TANT0 AMIGOS
+            if (request.getParameter("EditarPreferencias") != null) {
+                Usuario u = (Usuario) session.getAttribute("usuario");
+                String relacion = request.getParameter("relacion");
+                int deporte = Integer.parseInt(request.getParameter("deporte"));
+                int arte = Integer.parseInt(request.getParameter("arte"));
+                int politica = Integer.parseInt(request.getParameter("politica"));
+                String tieneHijos = request.getParameter("tieneHijos");
+                String quiereHijos = request.getParameter("quiereHijos");
+                String interesMujeres = request.getParameter("interesMujeres");
+                String interesHombres = request.getParameter("interesHombres");
+                u.setRelacion(relacion);
+                u.setDeporte(deporte);
+                u.setArte(arte);
+                u.setPolitica(politica);
+                if (tieneHijos.equals("Sí")) {
+                    u.setTieneHijos(true);
+                } else {
+                    u.setTieneHijos(false);
+                }
+                if (quiereHijos.equals("Sí")) {
+                    u.setQuiereHijos(true);
+                } else {
+                    u.setQuiereHijos(false);
+                }
+                if (interesMujeres.equals("Sí")) {
+                    u.setInteresMujeres(true);
+                } else {
+                    u.setInteresMujeres(false);
+                }
+                if (interesHombres.equals("Sí")) {
+                    u.setInteresHombres(true);
+                } else {
+                    u.setInteresHombres(false);
+                }
+                session.setAttribute("usuario", u);
+                ConexionEstatica.nueva();
+                ConexionEstatica.editarPreferenciasUsuario(u);
+                ConexionEstatica.cerrarBD();
+               
+                response.sendRedirect("index.jsp");
             }
 
             //ENTRAR COMO ADMINISTRADOR: CRUD
