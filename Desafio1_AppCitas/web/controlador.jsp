@@ -77,7 +77,7 @@
                                 }
                             }
                         }
-
+                        session.setAttribute("usuariosPreferencias", usuariosPreferencias);
                         //Buscar usuarios afines
                         for (int i = 0; i < usuariosPreferencias.size(); i++) {
                             cont = 0;
@@ -243,11 +243,11 @@
             //IR A VER AMIGOS
             if (request.getParameter("verAmigos") != null) {
                 Usuario yo = (Usuario) session.getAttribute("usuario");
-                LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
+                LinkedList usuariosPreferencias = (LinkedList) session.getAttribute("usuariosPreferencias");
                 LinkedList amigos = new LinkedList();
                 ConexionEstatica.nueva();
-                for (int i = 0; i < usuariosAfines.size(); i++) {
-                    Usuario u = (Usuario) usuariosAfines.get(i);
+                for (int i = 0; i < usuariosPreferencias.size(); i++) {
+                    Usuario u = (Usuario) usuariosPreferencias.get(i);
                     if (ConexionEstatica.sonAmigos(yo.getEmail(), u.getEmail())) {
                         amigos.add(u);
                     }
@@ -292,19 +292,19 @@
                 Usuario yo = (Usuario) session.getAttribute("usuario");
                 ConexionEstatica.nueva();
                 ConexionEstatica.noMeGusta(yo.getEmail(), amigo.getEmail());
-                
+
                 //Actualiza los amigos 
-                LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
+                LinkedList usuariosPreferencias = (LinkedList) session.getAttribute("usuariosPreferencias");
                 LinkedList amigos = new LinkedList();
                 ConexionEstatica.nueva();
-                for (int i = 0; i < usuariosAfines.size(); i++) {
-                    Usuario u = (Usuario) usuariosAfines.get(i);
+                for (int i = 0; i < usuariosPreferencias.size(); i++) {
+                    Usuario u = (Usuario) usuariosPreferencias.get(i);
                     if (ConexionEstatica.sonAmigos(yo.getEmail(), u.getEmail())) {
                         amigos.add(u);
                     }
                 }
                 session.setAttribute("amigos", amigos);
-                
+
                 ConexionEstatica.cerrarBD();
                 response.sendRedirect("Vistas/amigos.jsp");
             }
@@ -345,25 +345,25 @@
                 u.setDeporte(deporte);
                 u.setArte(arte);
                 u.setPolitica(politica);
-                if (tieneHijos.equals("Sí")) {
-                    u.setTieneHijos(true);
-                } else {
+                if (tieneHijos.equals("No")) {
                     u.setTieneHijos(false);
-                }
-                if (quiereHijos.equals("Sí")) {
-                    u.setQuiereHijos(true);
                 } else {
+                    u.setTieneHijos(true);
+                }
+                if (quiereHijos.equals("No")) {
                     u.setQuiereHijos(false);
+                } else {
+                    u.setQuiereHijos(true);
                 }
                 if (interesMujeres.equals("Sí")) {
-                    u.setInteresMujeres(true);
-                } else {
                     u.setInteresMujeres(false);
+                } else {
+                    u.setInteresMujeres(true);
                 }
                 if (interesHombres.equals("Sí")) {
-                    u.setInteresHombres(true);
-                } else {
                     u.setInteresHombres(false);
+                } else {
+                    u.setInteresHombres(true);
                 }
                 session.setAttribute("usuario", u);
                 ConexionEstatica.nueva();
@@ -404,7 +404,7 @@
                 LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
                 String pos = "", accion = "";
                 int posElegida = 0;
-                if (usuariosAfines.size() >= 0) {
+                if (usuariosAfines.size() > 0) {
                     for (int i = 0; i < usuariosAfines.size(); i++) {
                         pos = String.valueOf(i);
                         if (request.getParameter(pos) != null) {

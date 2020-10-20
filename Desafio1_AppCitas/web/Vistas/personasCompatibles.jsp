@@ -52,7 +52,7 @@
                 <%
                     Usuario yo = (Usuario) session.getAttribute("usuario");
                     LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
-                    if (usuariosAfines.size() >= 0) {
+                    if (usuariosAfines.size() > 0) {
                         for (int i = 0; i < usuariosAfines.size(); i++) {
                             Usuario u = (Usuario) usuariosAfines.get(i);
 
@@ -214,7 +214,7 @@
                     }
                 } else {
                 %>
-                <h1>Lo siento,no hemos encontrado personas afines a ti</h1>
+                <p>Lo siento, no hemos encontrado personas afines a ti</p>
                 <%
                     }
                 %>
