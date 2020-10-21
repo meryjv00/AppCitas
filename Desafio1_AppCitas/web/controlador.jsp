@@ -276,11 +276,13 @@
                         }
                     }
                     Usuario usu = (Usuario) amigos.get(posElegida);
-                    session.setAttribute("amigoSeleccionado", usu);
+                    
                     if (accion.equals("Ver en detalle")) {
+                        session.setAttribute("amigoSeleccionado", usu);
                         response.sendRedirect("Vistas/detalleAmigo.jsp");
                     }
                     if (accion.equals("Enviar mensaje")) {
+                        session.setAttribute("amigoSeleccionado", usu);
                         response.sendRedirect("Vistas/enviarMensaje.jsp");
                     }
                 }
@@ -330,7 +332,6 @@
                 response.sendRedirect("Vistas/perfil.jsp");
             }
             //EDITAR PREFERENCIAS
-            //NO CAMBIAR PREFERENCIAS YA Q CAMBIARIAN USUARIOS AFINES Y POR LO TANT0 AMIGOS
             if (request.getParameter("EditarPreferencias") != null) {
                 Usuario u = (Usuario) session.getAttribute("usuario");
                 String relacion = request.getParameter("relacion");
@@ -398,7 +399,7 @@
                 response.sendRedirect("Vistas/elegirAdmin.jsp");
             }
 
-            //Añadir como amigos - enviar mensaje
+            //Añadir como amigos - enviar mensaje a usuario afin
             if (session.getAttribute("usuariosAfines") != null) {
                 Usuario u = (Usuario) session.getAttribute("usuario");
                 LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
@@ -426,9 +427,10 @@
                         ConexionEstatica.noMeGusta(u.getEmail(), usu.getEmail());
                         response.sendRedirect("Vistas/personasCompatibles.jsp");
                     }
-                    //Enviar mensaje ++++++++
-                    if (accion.equals("Enviar mensaje")) {
-
+                    //Mandar mensaje a persona afin
+                    if (accion.equals("Mandar mensaje")) {
+                        session.setAttribute("afinSeleccionado", usu);
+                        response.sendRedirect("Vistas/enviarMensaje.jsp");
                     }
 
                     ConexionEstatica.cerrarBD();
