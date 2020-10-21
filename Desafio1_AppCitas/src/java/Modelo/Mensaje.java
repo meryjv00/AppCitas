@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
  */
 public class Mensaje {
 
-    private static int id = 0;
+    private int id;
     private String asunto;
     private String cuerpo;
     private String emisor;
@@ -36,8 +36,6 @@ public class Mensaje {
     }
 
     public Mensaje(String asunto, String cuerpo, String emisor, String receptor) {
-        incrementarId();
-        this.id = id;
         this.asunto = asunto;
         this.cuerpo = cuerpo;
         this.emisor = emisor;
@@ -45,11 +43,8 @@ public class Mensaje {
         this.fecha = fechaActual();
         this.leido = false;
     }
-    
-    private void incrementarId(){
-        this.id++;
-    }
-      
+
+
     private String fechaActual() {
         String fecha = "";
         Calendar f = new GregorianCalendar();

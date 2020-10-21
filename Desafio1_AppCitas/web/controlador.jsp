@@ -263,13 +263,15 @@
                 Usuario yo = (Usuario) session.getAttribute("usuario");
                 ConexionEstatica.nueva();
                 LinkedList mensajesParaMi = (LinkedList) ConexionEstatica.mensajesParaMi(yo);
+                LinkedList mensajesParaMiNoLeidos = (LinkedList) ConexionEstatica.mensajesParaMiNoLeidos(yo);
                 LinkedList mensajesEnviados = (LinkedList) ConexionEstatica.mensajesEnviados(yo);
                 ConexionEstatica.cerrarBD();
                 session.setAttribute("mensajesParaMi", mensajesParaMi);
                 session.setAttribute("mensajesEnviados", mensajesEnviados);
+                session.setAttribute("mensajesParaMiNoLeidos", mensajesParaMiNoLeidos);
                 response.sendRedirect("Vistas/mensajes.jsp");
             }
-            
+
             //Ver en detalle + enviar mensaje a amigo
             if (session.getAttribute("amigos") != null) {
                 LinkedList amigos = (LinkedList) session.getAttribute("amigos");
@@ -284,7 +286,7 @@
                         }
                     }
                     Usuario usu = (Usuario) amigos.get(posElegida);
-                    
+
                     if (accion.equals("Ver en detalle")) {
                         session.setAttribute("amigoSeleccionado", usu);
                         response.sendRedirect("Vistas/detalleAmigo.jsp");
@@ -423,16 +425,19 @@
                     }
 
                     Usuario usu = (Usuario) usuariosAfines.get(posElegida);
-                    ConexionEstatica.nueva();
 
                     //Añadir como q me gusta
                     if (accion.equals("Me gusta")) {
+                        ConexionEstatica.nueva();
                         ConexionEstatica.meGusta(u.getEmail(), usu.getEmail());
+                        ConexionEstatica.cerrarBD();
                         response.sendRedirect("Vistas/personasCompatibles.jsp");
                     }
                     //Borrar como q me gusta
                     if (accion.equals("No me gusta")) {
+                        ConexionEstatica.nueva();
                         ConexionEstatica.noMeGusta(u.getEmail(), usu.getEmail());
+                        ConexionEstatica.cerrarBD();
                         response.sendRedirect("Vistas/personasCompatibles.jsp");
                     }
                     //Mandar mensaje a persona afin
@@ -441,25 +446,50 @@
                         response.sendRedirect("Vistas/enviarMensaje.jsp");
                     }
 
-                    ConexionEstatica.cerrarBD();
                 }
 
             }
 
             //Enviar mensaje
-            if(request.getParameter("EnviarMsj")!= null){
+            if (request.getParameter("EnviarMsj") != null) {
                 String de = request.getParameter("de");
                 String para = request.getParameter("para");
                 String asunto = request.getParameter("asunto");
                 String cuerpo = request.getParameter("cuerpo");
-                
-                Mensaje m = new Mensaje(asunto,cuerpo,de,para);
+
+                Mensaje m = new Mensaje(asunto, cuerpo, de, para);
                 ConexionEstatica.nueva();
                 ConexionEstatica.enviarMensaje(m);
                 ConexionEstatica.cerrarBD();
                 response.sendRedirect("Vistas/personasCompatibles.jsp");
             }
 
+            //Página detalle mensaje los marca como leídos
+            if (session.getAttribute("mensajesParaMi") != null) {
+                LinkedList mensajesParaMiNoLeidos = (LinkedList) session.getAttribute("mensajesParaMiNoLeidos");
+                String pos = "", accion = "";
+                int posElegida = 0;
+
+                if (mensajesParaMiNoLeidos.size() > 0) {
+                    for (int i = 0; i < mensajesParaMiNoLeidos.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+
+                    if (accion.equals("Leer mensaje")) {
+                        Mensaje m = (Mensaje) mensajesParaMiNoLeidos.get(posElegida);
+                        ConexionEstatica.nueva();
+                        ConexionEstatica.marcarLeido(m);
+                        ConexionEstatica.cerrarBD();
+                        session.setAttribute("mensajeSeleccionado", m);
+                        response.sendRedirect("Vistas/detalleMensaje.jsp");
+                    }
+
+                }
+            }
         %>
     </body>
 </html>
