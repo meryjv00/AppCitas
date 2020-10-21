@@ -260,9 +260,16 @@
 
             //IR A VER MENSAJES
             if (request.getParameter("verMensajes") != null) {
-                //+++++
+                Usuario yo = (Usuario) session.getAttribute("usuario");
+                ConexionEstatica.nueva();
+                LinkedList mensajesParaMi = (LinkedList) ConexionEstatica.mensajesParaMi(yo);
+                LinkedList mensajesEnviados = (LinkedList) ConexionEstatica.mensajesEnviados(yo);
+                ConexionEstatica.cerrarBD();
+                session.setAttribute("mensajesParaMi", mensajesParaMi);
+                session.setAttribute("mensajesEnviados", mensajesEnviados);
                 response.sendRedirect("Vistas/mensajes.jsp");
             }
+            
             //Ver en detalle + enviar mensaje a amigo
             if (session.getAttribute("amigos") != null) {
                 LinkedList amigos = (LinkedList) session.getAttribute("amigos");
