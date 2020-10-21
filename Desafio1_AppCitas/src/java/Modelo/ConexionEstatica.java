@@ -436,11 +436,19 @@ public class ConexionEstatica {
             ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
             //MODIFICAR interes en hombres
             sentencia = "UPDATE " + Constantes.tabla_asignacion_preferencias + " SET Valoracion ='"
-                    + u.isInteresHombres()+ "' WHERE IdPref=8 AND Email='" + u.getEmail() + "'";
+                    + u.isInteresHombres() + "' WHERE IdPref=8 AND Email='" + u.getEmail() + "'";
             ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
         } catch (SQLException ex) {
         }
     }
-    
-    
+
+    public static void enviarMensaje(Mensaje m) {
+        try {
+            String sentencia = "INSERT INTO " + Constantes.tabla_mensajes + " VALUES(" + m.getId() + ",'"
+                    + m.getAsunto() + "','" + m.getCuerpo() + "','" + m.getEmisor() + "','" + m.getReceptor() + "','"
+                    + m.getFecha() + "', false)";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+        } catch (SQLException ex) {
+        }
+    }
 }

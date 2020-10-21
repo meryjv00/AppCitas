@@ -5,12 +5,16 @@
  */
 package Modelo;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author Mery
  */
 public class Mensaje {
-    private static int id;
+
+    private static int id = 0;
     private String asunto;
     private String cuerpo;
     private String emisor;
@@ -31,14 +35,29 @@ public class Mensaje {
         this.leido = leido;
     }
 
-    public Mensaje(String asunto, String cuerpo, String emisor, String receptor, String fecha, boolean leido) {
-        this.id = this.id++;
+    public Mensaje(String asunto, String cuerpo, String emisor, String receptor) {
+        incrementarId();
+        this.id = id;
         this.asunto = asunto;
         this.cuerpo = cuerpo;
         this.emisor = emisor;
         this.receptor = receptor;
-        this.fecha = fecha;
-        this.leido = leido;
+        this.fecha = fechaActual();
+        this.leido = false;
+    }
+    
+    private void incrementarId(){
+        this.id++;
+    }
+      
+    private String fechaActual() {
+        String fecha = "";
+        Calendar f = new GregorianCalendar();
+        int dia = f.get(Calendar.DAY_OF_MONTH);
+        int mes = f.get(Calendar.MONTH);
+        int annio = f.get(Calendar.YEAR);
+        fecha = dia + "/" + mes + "/" + annio;
+        return fecha;
     }
 
     public int getId() {
@@ -96,6 +115,5 @@ public class Mensaje {
     public void setLeido(boolean leido) {
         this.leido = leido;
     }
-    
-    
+
 }

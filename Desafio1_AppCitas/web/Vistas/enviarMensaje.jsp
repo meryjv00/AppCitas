@@ -86,7 +86,7 @@
                         <div class="row">
                             <fieldset class="col-m-11">
                                 <legend>Mensaje</legend>
-                                <textarea rows="4" name="cuerpo"></textarea>
+                                <textarea rows="4" name="cuerpo" required></textarea>
                             </fieldset>
                         </div>
                         

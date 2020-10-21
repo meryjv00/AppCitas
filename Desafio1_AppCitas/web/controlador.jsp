@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="Modelo.Mensaje"%>
 <%@page import="Auxiliar.VerificarRecaptcha"%>
 <%@page import="Modelo.Email"%>
 <%@page import="Auxiliar.Bitacora"%>
@@ -440,7 +441,16 @@
 
             //Enviar mensaje
             if(request.getParameter("EnviarMsj")!= null){
+                String de = request.getParameter("de");
+                String para = request.getParameter("para");
+                String asunto = request.getParameter("asunto");
+                String cuerpo = request.getParameter("cuerpo");
                 
+                Mensaje m = new Mensaje(asunto,cuerpo,de,para);
+                ConexionEstatica.nueva();
+                ConexionEstatica.enviarMensaje(m);
+                ConexionEstatica.cerrarBD();
+                response.sendRedirect("Vistas/personasCompatibles.jsp");
             }
 
         %>
