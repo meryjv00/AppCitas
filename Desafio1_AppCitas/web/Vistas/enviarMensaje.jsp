@@ -89,7 +89,13 @@
                                 <textarea rows="4" name="cuerpo"></textarea>
                             </fieldset>
                         </div>
-                        <div><input type=""/></div>
+                        
+                        <div class="row">
+                            <div class="col-m-11">
+                                <hr>
+                                <input type="submit" name="EnviarMsj" value="Enviar" class="boton"/>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-m-2 col-l-3"></div>
                 </div>

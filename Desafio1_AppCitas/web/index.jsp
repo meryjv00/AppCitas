@@ -17,7 +17,7 @@
         <script src="https://www.google.com/recaptcha/api.js"></script>
 
     </head>
-    <body onload="validacionLogin()" name="ajustar">
+    <body onload="validacionLogin()">
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">

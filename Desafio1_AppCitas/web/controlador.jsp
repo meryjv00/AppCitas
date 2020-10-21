@@ -438,6 +438,10 @@
 
             }
 
+            //Enviar mensaje
+            if(request.getParameter("EnviarMsj")!= null){
+                
+            }
 
         %>
     </body>

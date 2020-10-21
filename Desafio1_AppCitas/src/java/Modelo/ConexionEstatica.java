@@ -441,4 +441,6 @@ public class ConexionEstatica {
         } catch (SQLException ex) {
         }
     }
+    
+    
 }
