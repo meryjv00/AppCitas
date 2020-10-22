@@ -32,24 +32,24 @@
                     <input type="radio" name="relacion" value="Esporadica"/>Relación esporádica
                 </fieldset>
 
-                <p>
+                <div class="m1">
                     <label for="deporte">
                         <span>Puntua tu afición por el deporte:</span>
                         <input type="range" max="100" min="0" value="0" name="deporte"/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="arte">
                         <span>Puntua tu gusto por el arte:</span>
                         <input type="range" max="100" min="0" value="0" name="arte"/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="politica">
                         <span>Puntua tu interés por la política:</span>
                         <input type="range" max="100" min="0" value="0" name="politica"/>
                     </label>
-                </p>
+                </div>
                 <fieldset>
                     <legend>Interés en hijos:</legend>
                     <input type="checkbox" name="tieneHijos" value="tieneHijos">Tiene hijos<br>
@@ -62,9 +62,9 @@
                     <input type="checkbox" name="interesHombres" value="interesHombres">Interés en hombres
                 </fieldset>
 
-                <p><input type="submit" name="Rellenar" value="Confirmar" class="boton ancho100"/></p>
+                <div class="m1"><input type="submit" name="Rellenar" value="Confirmar" class="boton ancho100"/></div>
                 <hr>
-                <input type="submit" name="cerrarSesion" value="Cerrar sesión" class="boton ancho100">
+                <div class="m1"><input type="submit" name="cerrarSesion" value="Cerrar sesión" class="boton ancho100"></div>
 
             </form>
             <div class="col-m-3 col-l-4"></div>

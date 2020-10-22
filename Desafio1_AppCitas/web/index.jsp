@@ -29,23 +29,23 @@
             <form name="login" id="login" action="controlador.jsp" class="col-m-6 col-l-4" novalidate> 
                 <h1>LOGIN</h1>
                 <hr>
-                <p>
+                <div class="m1">
                     <label for="email">
                         <input type="email" name="email" id="email" placeholder="Introduce tu email" required/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="psswd">
                         <input type="password" name="psswd" id="psswd" placeholder="Introduce tu contraseña"/>
                         <span class="error" aria-live="polite"></span>   
                     </label>
-                </p>
-                <p><input type="submit" name="Aceptar" value="Entrar" class="boton"></p>
+                </div>
+                <div class="m1"><input type="submit" name="Aceptar" value="Entrar" class="boton"></div>
                     <%
                         session.removeAttribute("captchaActivo");
                         int az = (int) (Math.random() * 3);
-                        
+
                         if (az == 0) {
                             session.setAttribute("captchaActivo", "Si");
                     %>
@@ -58,14 +58,16 @@
                     if (session.getAttribute("mensaje") != null) {
                         String mensaje = (String) session.getAttribute("mensaje");
                 %>
-                <span name="mensaje" id="mensaje"><%=mensaje%></span>
+                <div class="m1 centrado"><span name="mensaje" id="mensaje"><%=mensaje%></span></div>
                 <%
                     }
                 %>
 
-                <a href="Vistas/registro.jsp"><input type="button" name="Registrar" value="Registrate" class="boton"/></a>
+                <div class=m1>
+                    <a href="Vistas/registro.jsp"><input type="button" name="Registrar" value="Registrate" class="boton"/></a>
+                </div>
                 <hr>
-                <a href="Vistas/olvidada.jsp">He olvidado la contraseña</a>
+                <div class="m1"><a href="Vistas/olvidada.jsp">He olvidado la contraseña</a></div>
             </form>
             <div class="col-m-3 col-l-4"></div>
         </main>

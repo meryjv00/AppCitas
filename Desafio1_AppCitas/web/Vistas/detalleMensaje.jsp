@@ -60,6 +60,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-m-5">
+                                    <span>Fecha:</span>
+                                </div>
+                                <div class="col-m-7">
+                                    <input type="text" name="fecha" value="<%=m.getFecha()%>" readonly/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-m-5">
                                     <span>Asunto:</span>
                                 </div>
                                 <div class="col-m-7">

@@ -8,6 +8,25 @@ and open the template in the editor.
     Author     : Mery
 */
 
+@keyframes entrada{
+    from {
+        right: 100%;
+    }
+
+    to {
+        right: 0%;
+    }
+}
+
+@keyframes escaladaImagen{
+    from {
+        width: 200px;
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
 
 .row::after 
 {
@@ -97,10 +116,12 @@ footer.index{
     margin-bottom: 500px;
 }
 .imagenLogo{
-    width: 250px;
     display: block;
     margin:auto;
+    animation-duration: 2s;
+    animation-name: escaladaImagen;
 }
+
 body{
     background-image: linear-gradient( 359deg,  rgba(150,192,255,1) -17.7%, rgba(255,180,161,1) 101.5% );
     height: 100%;
@@ -109,6 +130,10 @@ body{
 .subrayado{
     text-decoration: underline;
 }
+.centrado{
+    text-align: center;
+}
+
 /*------------------------------BOTON*/
 .boton{
     background: white;
@@ -126,15 +151,6 @@ body{
 }
 
 /*------------------------------FORMULARIO COMUN*/
-@keyframes entrada{
-    from {
-        right: 100%;
-    }
-
-    to {
-        right: 0%;
-    }
-}
 
 
 form h1{
@@ -164,9 +180,9 @@ fieldset{
 
 
 /*------------------------------FORMULARIO LOGIN*/
-form[name=login] input{
+form[name=login] input:not([type="checkbox"]){
     width: 100%;
-    /*border: 0px;*/
+    
 }
 
 form[name=login] p{
@@ -176,6 +192,7 @@ form[name=login] p{
 form input:focus{
     border: 2px solid black;
 }
+
 /*------------------------------FORMULARIO CRUD*/
 
 fieldset.crud input{
@@ -254,4 +271,13 @@ textarea{
 
 hr{
     color:white;
+}
+
+.m1{
+    margin: 1.20em;
+}
+
+canvas{
+    display: block;
+    width: 100%;
 }
