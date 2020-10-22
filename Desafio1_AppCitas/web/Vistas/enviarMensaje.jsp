@@ -89,7 +89,11 @@
                                 <textarea rows="4" name="cuerpo" required></textarea>
                             </fieldset>
                         </div>
-                        
+                        <div class="row">
+                            <div class="col-m-11">
+                                <input type="file" name="fichero"/>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-m-11">
                                 <hr>
