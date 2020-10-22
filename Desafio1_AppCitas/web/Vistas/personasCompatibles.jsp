@@ -52,7 +52,7 @@
                 <%
                     Usuario yo = (Usuario) session.getAttribute("usuario");
                     LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
-                    if (usuariosAfines.size() >= 0) {
+                    if (usuariosAfines.size() > 0) {
                         for (int i = 0; i < usuariosAfines.size(); i++) {
                             Usuario u = (Usuario) usuariosAfines.get(i);
 
@@ -69,7 +69,7 @@
                             <div class="col-m-7">
                                 <span>Relación:</span>
                             </div>
-                            <div class="col-m-4">
+                            <div class="col-m-5">
                                 <span><%=u.getRelacion()%></span>
                             </div>
                         </div>
@@ -77,31 +77,37 @@
                             }
                             if (u.getDeporte() - 10 <= yo.getDeporte() && yo.getDeporte() <= u.getDeporte() + 10) {
                         %>
-                        <div class="col-m-7">
-                            <span>Deporte:</span>
-                        </div>
-                        <div class="col-m-4">
-                            <span><%=u.getDeporte()%></span>
+                        <div class="row">
+                            <div class="col-m-7">
+                                <span>Deporte:</span>
+                            </div>
+                            <div class="col-m-5">
+                                <span><%=u.getDeporte()%></span>
+                            </div>
                         </div>
                         <%
                             }
                             if (u.getArte() - 10 <= yo.getArte() && yo.getArte() <= u.getArte() + 10) {
                         %>
-                        <div class="col-m-7">
-                            <span>Arte:</span>
-                        </div>
-                        <div class="col-m-4">
-                            <span><%=u.getArte()%></span>
+                        <div class="row">
+                            <div class="col-m-7">
+                                <span>Arte:</span>
+                            </div>
+                            <div class="col-m-5">
+                                <span><%=u.getArte()%></span>
+                            </div>
                         </div>
                         <%
                             }
                             if (u.getPolitica() - 10 <= yo.getPolitica() && yo.getPolitica() <= u.getPolitica() + 10) {
                         %>
-                        <div class="col-m-7">
-                            <span>Política:</span>
-                        </div>
-                        <div class="col-m-4">
-                            <span><%=u.getPolitica()%></span>
+                        <div class="row">
+                            <div class="col-m-7">
+                                <span>Política:</span>
+                            </div>
+                            <div class="col-m-5">
+                                <span><%=u.getPolitica()%></span>
+                            </div>
                         </div>
                         <%
                             }
@@ -111,7 +117,7 @@
                             <div class="col-m-7">
                                 <span>Tiene hijos:</span>
                             </div>
-                            <div class="col-m-4">
+                            <div class="col-m-5">
                                 <%
                                     String tieneHijos = "";
                                     if (u.isTieneHijos() == false) {
@@ -131,7 +137,7 @@
                             <div class="col-m-7">
                                 <span>Quiere hijos:</span>
                             </div>
-                            <div class="col-m-4">
+                            <div class="col-m-5">
                                 <%
                                     String quiereHijos = "";
                                     if (u.isQuiereHijos() == false) {
@@ -151,7 +157,7 @@
                             <div class="col-m-7">
                                 <span>Interés por mujeres:</span>
                             </div>
-                            <div class="col-m-4">
+                            <div class="col-m-5">
                                 <%
                                     String interesMujeres = "";
                                     if (u.isInteresMujeres() == false) {
@@ -171,7 +177,7 @@
                             <div class="col-m-7">
                                 <span>Interés por hombres:</span>
                             </div>
-                            <div class="col-m-4">
+                            <div class="col-m-5">
                                 <%
                                     String interesHomres = "";
                                     if (u.isInteresHombres() == false) {
@@ -202,7 +208,7 @@
                                 <input type="submit" name="<%=i%>" id="megusta" value="<%=txt%>" class="boton" />
                             </div>
                             <div class="col-m-6">
-                                <input type="submit" name="<%=i%>" value="Enviar mensaje" class="boton"/>
+                                <input type="submit" name="<%=i%>" value="Mandar mensaje" class="boton"/>
                             </div>
 
                         </div>
@@ -214,17 +220,17 @@
                     }
                 } else {
                 %>
-                <h1>Lo siento,no hemos encontrado personas afines a ti</h1>
+                <p>Lo siento, no hemos encontrado personas afines a ti</p>
                 <%
                     }
                 %>
                 <hr>
                 <a href="#arriba"><input type="button" value="Ir arriba" class="boton"/></a>
             </form>
-        <div class="col-m-2 col-l-3"></div>
-    </main>
-    <footer>
-        <p>© María Juan Viñas, 2020</p>
-    </footer>
-</body>
+            <div class="col-m-2 col-l-3"></div>
+        </main>
+        <footer>
+            <p>© María Juan Viñas, 2020</p>
+        </footer>
+    </body>
 </html>

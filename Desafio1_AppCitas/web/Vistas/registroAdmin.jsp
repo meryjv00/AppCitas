@@ -25,54 +25,52 @@
             <div class="col-m-3 col-l-4"></div>
             <form name="login" action="../controladorAdmin.jsp"class="col-m-6 col-l-4" > 
                 <h1>Registra un usuario:</h1>
-                <p>
+                <div class="m1">
                     <label for="email">
                         <span>Introduce el email: </span>
                         <input type="email" name="email" id="email" required/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="dni">
                         <span>Introduce el dni: </span>
                         <input type="text" name="dni" id="dni" required/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="apodo">
                         <span>Introduce el nick: </span>
                         <input type="text" name="apodo" id="apodo" required/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="psswd">
                         <span>Introduce la contraseña: </span>
                         <input type="password" name="psswd" id="psswd" required/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="psswd2">
                         <span>Repite la contraseña: </span>
                         <input type="password" name="psswd2" id="psswd2" required/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="tfno">
                         <span>Introduce el teléfono: </span>
                         <input type="text" name="tfno" id="tfno"/>
                     </label>
-                </p>
-                <p>
+                </div>
+                <div class="m1">
                     <label for="edad">
                         <span>Introduce la edad: </span>
                         <input type="text" name="edad" id="edad"/>
                     </label>
-                </p>
-                <p>
-                    <label for="rolUsuario">
-                        <span>Marcar como administrador: </span><br>
-                        <input type="checkbox" name="rolAdmin"/>Administrador
-                    </label>
-                </p>
+                </div>
+                <div class="m1">
+                    <span>Marcar como administrador: </span>
+                    <input class="izq" type="checkbox" name="rolAdmin"/>Administrador
+                </div>
                 <input type="submit" name="RegistrarComoAdmin" value="Confirmar" class="boton"/>
                 <hr>
                 <a href="CRUDusuarios.jsp"><input type="button" value="Volver" class="boton"></a>

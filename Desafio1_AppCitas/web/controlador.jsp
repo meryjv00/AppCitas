@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="Modelo.Mensaje"%>
 <%@page import="Auxiliar.VerificarRecaptcha"%>
 <%@page import="Modelo.Email"%>
 <%@page import="Auxiliar.Bitacora"%>
@@ -30,6 +31,15 @@
                     String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
                     verificado = VerificarRecaptcha.verificar(gRecaptchaResponse);
                 }
+
+                //USUARIOS CONECTADOS
+                Integer contador = (Integer) application.getAttribute("usuariosConectados");
+                if (contador == null || contador == 0) {
+                    contador = 1;
+                } else {
+                    contador++;
+                }
+                application.setAttribute("usuariosConectados", contador);
 
                 ConexionEstatica.nueva();
                 Usuario u = ConexionEstatica.existeUsuario(email, contra);
@@ -77,7 +87,7 @@
                                 }
                             }
                         }
-
+                        session.setAttribute("usuariosPreferencias", usuariosPreferencias);
                         //Buscar usuarios afines
                         for (int i = 0; i < usuariosPreferencias.size(); i++) {
                             cont = 0;
@@ -243,11 +253,11 @@
             //IR A VER AMIGOS
             if (request.getParameter("verAmigos") != null) {
                 Usuario yo = (Usuario) session.getAttribute("usuario");
-                LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
+                LinkedList usuariosPreferencias = (LinkedList) session.getAttribute("usuariosPreferencias");
                 LinkedList amigos = new LinkedList();
                 ConexionEstatica.nueva();
-                for (int i = 0; i < usuariosAfines.size(); i++) {
-                    Usuario u = (Usuario) usuariosAfines.get(i);
+                for (int i = 0; i < usuariosPreferencias.size(); i++) {
+                    Usuario u = (Usuario) usuariosPreferencias.get(i);
                     if (ConexionEstatica.sonAmigos(yo.getEmail(), u.getEmail())) {
                         amigos.add(u);
                     }
@@ -259,9 +269,18 @@
 
             //IR A VER MENSAJES
             if (request.getParameter("verMensajes") != null) {
-                //+++++
+                Usuario yo = (Usuario) session.getAttribute("usuario");
+                ConexionEstatica.nueva();
+                LinkedList mensajesParaMi = (LinkedList) ConexionEstatica.mensajesParaMi(yo);
+                LinkedList mensajesParaMiNoLeidos = (LinkedList) ConexionEstatica.mensajesParaMiNoLeidos(yo);
+                LinkedList mensajesEnviados = (LinkedList) ConexionEstatica.mensajesEnviados(yo);
+                ConexionEstatica.cerrarBD();
+                session.setAttribute("mensajesParaMi", mensajesParaMi);
+                session.setAttribute("mensajesEnviados", mensajesEnviados);
+                session.setAttribute("mensajesParaMiNoLeidos", mensajesParaMiNoLeidos);
                 response.sendRedirect("Vistas/mensajes.jsp");
             }
+
             //Ver en detalle + enviar mensaje a amigo
             if (session.getAttribute("amigos") != null) {
                 LinkedList amigos = (LinkedList) session.getAttribute("amigos");
@@ -276,11 +295,13 @@
                         }
                     }
                     Usuario usu = (Usuario) amigos.get(posElegida);
-                    session.setAttribute("amigoSeleccionado", usu);
-                    if (accion.equals("Ver en detalle")) {
+
+                    if (accion.equals("Ver amigo")) {
+                        session.setAttribute("amigoSeleccionado", usu);
                         response.sendRedirect("Vistas/detalleAmigo.jsp");
                     }
                     if (accion.equals("Enviar mensaje")) {
+                        session.setAttribute("amigoSeleccionado", usu);
                         response.sendRedirect("Vistas/enviarMensaje.jsp");
                     }
                 }
@@ -292,19 +313,19 @@
                 Usuario yo = (Usuario) session.getAttribute("usuario");
                 ConexionEstatica.nueva();
                 ConexionEstatica.noMeGusta(yo.getEmail(), amigo.getEmail());
-                
+
                 //Actualiza los amigos 
-                LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
+                LinkedList usuariosPreferencias = (LinkedList) session.getAttribute("usuariosPreferencias");
                 LinkedList amigos = new LinkedList();
                 ConexionEstatica.nueva();
-                for (int i = 0; i < usuariosAfines.size(); i++) {
-                    Usuario u = (Usuario) usuariosAfines.get(i);
+                for (int i = 0; i < usuariosPreferencias.size(); i++) {
+                    Usuario u = (Usuario) usuariosPreferencias.get(i);
                     if (ConexionEstatica.sonAmigos(yo.getEmail(), u.getEmail())) {
                         amigos.add(u);
                     }
                 }
                 session.setAttribute("amigos", amigos);
-                
+
                 ConexionEstatica.cerrarBD();
                 response.sendRedirect("Vistas/amigos.jsp");
             }
@@ -330,7 +351,6 @@
                 response.sendRedirect("Vistas/perfil.jsp");
             }
             //EDITAR PREFERENCIAS
-            //NO CAMBIAR PREFERENCIAS YA Q CAMBIARIAN USUARIOS AFINES Y POR LO TANT0 AMIGOS
             if (request.getParameter("EditarPreferencias") != null) {
                 Usuario u = (Usuario) session.getAttribute("usuario");
                 String relacion = request.getParameter("relacion");
@@ -345,25 +365,25 @@
                 u.setDeporte(deporte);
                 u.setArte(arte);
                 u.setPolitica(politica);
-                if (tieneHijos.equals("Sí")) {
-                    u.setTieneHijos(true);
-                } else {
+                if (tieneHijos.equals("No")) {
                     u.setTieneHijos(false);
-                }
-                if (quiereHijos.equals("Sí")) {
-                    u.setQuiereHijos(true);
                 } else {
+                    u.setTieneHijos(true);
+                }
+                if (quiereHijos.equals("No")) {
                     u.setQuiereHijos(false);
+                } else {
+                    u.setQuiereHijos(true);
                 }
                 if (interesMujeres.equals("Sí")) {
-                    u.setInteresMujeres(true);
-                } else {
                     u.setInteresMujeres(false);
+                } else {
+                    u.setInteresMujeres(true);
                 }
                 if (interesHombres.equals("Sí")) {
-                    u.setInteresHombres(true);
-                } else {
                     u.setInteresHombres(false);
+                } else {
+                    u.setInteresHombres(true);
                 }
                 session.setAttribute("usuario", u);
                 ConexionEstatica.nueva();
@@ -384,7 +404,12 @@
             }
             //Cerrar sesion
             if (request.getParameter("cerrarSesion") != null) {
-                session.invalidate();
+                int usuariosConectados = (int) application.getAttribute("usuariosConectados");
+                usuariosConectados--;
+                application.setAttribute("usuariosConectados", usuariosConectados);
+                while (session.getAttributeNames().hasMoreElements()) {
+                    session.removeAttribute(session.getAttributeNames().nextElement());
+                }
                 response.sendRedirect("index.jsp");
             }
 
@@ -398,13 +423,13 @@
                 response.sendRedirect("Vistas/elegirAdmin.jsp");
             }
 
-            //Añadir como amigos - enviar mensaje
+            //Añadir como amigos - enviar mensaje a usuario afin
             if (session.getAttribute("usuariosAfines") != null) {
                 Usuario u = (Usuario) session.getAttribute("usuario");
                 LinkedList usuariosAfines = (LinkedList) session.getAttribute("usuariosAfines");
                 String pos = "", accion = "";
                 int posElegida = 0;
-                if (usuariosAfines.size() >= 0) {
+                if (usuariosAfines.size() > 0) {
                     for (int i = 0; i < usuariosAfines.size(); i++) {
                         pos = String.valueOf(i);
                         if (request.getParameter(pos) != null) {
@@ -414,29 +439,102 @@
                     }
 
                     Usuario usu = (Usuario) usuariosAfines.get(posElegida);
-                    ConexionEstatica.nueva();
 
                     //Añadir como q me gusta
                     if (accion.equals("Me gusta")) {
+                        ConexionEstatica.nueva();
                         ConexionEstatica.meGusta(u.getEmail(), usu.getEmail());
+                        ConexionEstatica.cerrarBD();
                         response.sendRedirect("Vistas/personasCompatibles.jsp");
                     }
                     //Borrar como q me gusta
                     if (accion.equals("No me gusta")) {
+                        ConexionEstatica.nueva();
                         ConexionEstatica.noMeGusta(u.getEmail(), usu.getEmail());
+                        ConexionEstatica.cerrarBD();
                         response.sendRedirect("Vistas/personasCompatibles.jsp");
                     }
-                    //Enviar mensaje ++++++++
-                    if (accion.equals("Enviar mensaje")) {
-
+                    //Mandar mensaje a persona afin
+                    if (accion.equals("Mandar mensaje")) {
+                        session.setAttribute("afinSeleccionado", usu);
+                        response.sendRedirect("Vistas/enviarMensaje.jsp");
                     }
 
-                    ConexionEstatica.cerrarBD();
                 }
 
             }
 
+            //Enviar mensaje
+            if (request.getParameter("EnviarMsj") != null) {
+                String de = request.getParameter("de");
+                String para = request.getParameter("para");
+                String asunto = request.getParameter("asunto");
+                String cuerpo = request.getParameter("cuerpo");
 
+                Mensaje m = new Mensaje(asunto, cuerpo, de, para);
+                ConexionEstatica.nueva();
+                ConexionEstatica.enviarMensaje(m);
+                ConexionEstatica.cerrarBD();
+                response.sendRedirect("Vistas/personasCompatibles.jsp");
+            }
+
+            //Página detalle mensaje los marca como leídos
+            if (session.getAttribute("mensajesParaMi") != null) {
+                LinkedList mensajesParaMiNoLeidos = (LinkedList) session.getAttribute("mensajesParaMiNoLeidos");
+                LinkedList mensajesParaMi = (LinkedList) session.getAttribute("mensajesParaMi");
+                LinkedList mensajesEnviados = (LinkedList) session.getAttribute("mensajesEnviados");
+
+                String pos = "", accion = "";
+                int posElegida = 0;
+
+                if (mensajesParaMiNoLeidos.size() > 0) {
+                    for (int i = 0; i < mensajesParaMiNoLeidos.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+                    if (accion.equals("Leer mensaje")) {
+                        Mensaje m = (Mensaje) mensajesParaMiNoLeidos.get(posElegida);
+                        ConexionEstatica.nueva();
+                        ConexionEstatica.marcarLeido(m);
+                        ConexionEstatica.cerrarBD();
+                        session.setAttribute("mensajeSeleccionado", m);
+                        response.sendRedirect("Vistas/detalleMensaje.jsp");
+                    }
+                }
+
+                if (mensajesParaMi.size() > 0) {
+                    for (int i = 0; i < mensajesParaMi.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+                    if (accion.equals("Ver en detalle")) {
+                        Mensaje m = (Mensaje) mensajesParaMi.get(posElegida);
+                        session.setAttribute("mensajeSeleccionado", m);
+                        response.sendRedirect("Vistas/detalleMensaje.jsp");
+                    }
+                }
+
+                if (mensajesEnviados.size() > 0) {
+                    for (int i = 0; i < mensajesEnviados.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+                    if (accion.equals("Ver enviado")) {
+                        Mensaje m = (Mensaje) mensajesEnviados.get(posElegida);
+                        session.setAttribute("mensajeSeleccionado", m);
+                        response.sendRedirect("Vistas/detalleMensaje.jsp");
+                    }
+                }
+            }
         %>
     </body>
 </html>

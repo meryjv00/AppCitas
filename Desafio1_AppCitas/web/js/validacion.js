@@ -76,8 +76,8 @@ function validacionRegistro() {
 //******************************************************************************
 //---------------------------------DNI------------------------------------------
 //******************************************************************************
-
-    dni.addEventListener('input', function (event) {
+    //focus - blur
+    dni.addEventListener('blur', function (event) {
         if (dni.validity.valid) {
             dniError.innerHTML = '';
             dniError.className = 'error';
@@ -102,7 +102,7 @@ function validacionRegistro() {
 //---------------------------------APODO----------------------------------------
 //******************************************************************************
 
-    apodo.addEventListener('input', function (event) {
+    apodo.addEventListener('blur', function (event) {
         if (apodo.validity.valid) {
             apodoError.innerHTML = '';
             apodoError.className = 'error';
@@ -129,7 +129,7 @@ function validacionRegistro() {
 //---------------------------------EDAD-----------------------------------------
 //******************************************************************************
 
-    edad.addEventListener('input', function (event) {
+    edad.addEventListener('blur', function (event) {
         if (edad.validity.valid) {
             edadError.innerHTML = '';
             edadError.className = 'error';
@@ -154,7 +154,7 @@ function validacionRegistro() {
 //---------------------------------TELEFONO-------------------------------------
 //******************************************************************************
 
-    tfno.addEventListener('input', function (event) {
+    tfno.addEventListener('blur', function (event) {
         if (tfno.validity.valid) {
             tfnoError.innerHTML = '';
             tfnoError.className = 'error';
@@ -178,7 +178,7 @@ function validacionRegistro() {
 //******************************************************************************
 //---------------------------------MAIL-----------------------------------------
 //******************************************************************************
-    mail.addEventListener('input', function (event) {
+    mail.addEventListener('blur', function (event) {
         if (mail.validity.valid) {
             mailError.innerHTML = '';
             mailError.className = 'error';
@@ -206,7 +206,7 @@ function validacionRegistro() {
 //******************************************************************************
 //---------------------------------CONTRA---------------------------------------
 //******************************************************************************
-    contra.addEventListener('input', function (event) {
+    contra.addEventListener('blur', function (event) {
         if (contra.validity.valid) {
             contraError.innerHTML = '';
             contraError.className = 'error';
@@ -266,7 +266,7 @@ function validacionLogin() {
         }
     });
 
-    mail.addEventListener('input', function (event) {
+    mail.addEventListener('blur', function (event) {
         if (mail.validity.valid) {
             mailError.innerHTML = '';
             mailError.className = 'error';

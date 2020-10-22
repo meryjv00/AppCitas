@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="../css/estilos.css">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300&display=swap" rel="stylesheet">
     </head>
-    <body name="ajustar">
+    <body>
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
@@ -51,10 +51,13 @@
                     if (u.sizeRoles() == 2) {
                 %>
                 <p><input type="submit" name="volverAdmin" value="Volver" class="boton"/></p>
-                <%
-                    }
-                %>
-                <input type="submit" name="cerrarSesion" value="Cerrar Sesión" class="boton"/>
+                    <%
+                        }
+                    %>
+                <input type="submit" name="cerrarSesion" value="Cerrar Sesión" class="boton"/> 
+                <div class="m1">
+                    <span>Total usuarios conectados: <%=application.getAttribute("usuariosConectados")%></span>
+                </div>
             </form>
             <div class="col-m-3 col-l-4"></div>
         </main>
