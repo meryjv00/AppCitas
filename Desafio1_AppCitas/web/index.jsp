@@ -21,7 +21,7 @@
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
-                <img src="img/logo4.png" class="imagenLogo"/>
+                <img src="img/logo4.png" class="imagenLogo escalado"/>
             </div>
         </header>
         <main class="row">
