@@ -40,7 +40,7 @@
                     contador++;
                 }
                 application.setAttribute("usuariosConectados", contador);
-                
+
                 ConexionEstatica.nueva();
                 Usuario u = ConexionEstatica.existeUsuario(email, contra);
                 if (u != null && verificado) {
@@ -404,7 +404,9 @@
             }
             //Cerrar sesion
             if (request.getParameter("cerrarSesion") != null) {
-                session.invalidate();
+                while (session.getAttributeNames().hasMoreElements()) {
+                    session.removeAttribute(session.getAttributeNames().nextElement());
+                }
                 response.sendRedirect("index.jsp");
             }
 

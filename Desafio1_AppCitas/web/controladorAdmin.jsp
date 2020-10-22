@@ -106,8 +106,11 @@
             if (request.getParameter("VolverCRUD") != null) {
                 response.sendRedirect("Vistas/CRUDusuarios.jsp");
             }
-            if(request.getParameter("CerrarSesion")!= null){
-                session.invalidate();
+            if (request.getParameter("CerrarSesion") != null) {
+                //session.invalidate();
+                while (session.getAttributeNames().hasMoreElements()) {
+                    session.removeAttribute(session.getAttributeNames().nextElement());
+                }
                 response.sendRedirect("index.jsp");
             }
         %>
