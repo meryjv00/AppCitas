@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var code = '';
+
 var captchaCorrecto = false;
 
 function validacionRegistro() {
@@ -295,30 +295,42 @@ function validacionLogin() {
 
 //-----------------------------CAPTCHA
 function captcha() {
-    var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+    var n = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    var op = new Array('+', '-', '*');
     var i;
     for (i = 0; i < 6; i++) {
-        var a = alpha[Math.floor(Math.random() * alpha.length)];
-        var b = alpha[Math.floor(Math.random() * alpha.length)];
-        var c = alpha[Math.floor(Math.random() * alpha.length)];
-        var d = alpha[Math.floor(Math.random() * alpha.length)];
-        var e = alpha[Math.floor(Math.random() * alpha.length)];
-        var f = alpha[Math.floor(Math.random() * alpha.length)];
-        var g = alpha[Math.floor(Math.random() * alpha.length)];
+        var a = n[Math.floor(Math.random() * n.length)];
+        var b = n[Math.floor(Math.random() * n.length)];
+        var op = op[Math.floor(Math.random() * op.length)]
     }
-    code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f + ' ' + g;
+    var code = '';
+    code = a + op + b;
     creaIMG(code);
+    document.cookie = 'code=' + code + ';max-age=120';
 }
 
 function validCaptcha(txtInput) {
     var captchaMensaje = document.getElementById("mensajeCaptcha");
     var botonRefrescar = document.getElementById("refresh");
     var txt = document.getElementById("txtInput");
-
+    var code = cargarCookie();
     var string1 = removeSpaces(code);
+    var n1 = parseInt(string1.substr(0, 1));
+    var op = string1.substr(1, 1);
+    var n2 = parseInt(string1.substr(2, 1));
+    var rdo;
     var string2 = removeSpaces(document.getElementById(txtInput).value);
+    if (op == '+') {
+        rdo = n1 + n2;
+    }
+    if (op == '*') {
+        rdo = n1 * n2;
+    }
+    if (op == '-') {
+        rdo = n1 - n2;
+    }
 
-    if (string1 === string2) {
+    if (rdo == string2) {
         captchaMensaje.innerHTML = "Captcha correcto.";
         captchaMensaje.className = 'error';
         captchaCorrecto = true;
@@ -328,6 +340,17 @@ function validCaptcha(txtInput) {
         captchaMensaje.className = 'error active';
         txt.value = '';
         captcha();
+    }
+}
+
+function cargarCookie() {
+    var nom_cookie, valor_cookie, temp;
+    var array_cookies = document.cookie.split('; ');
+    for (var i = 0; i < array_cookies.length; i++) {
+        temp = array_cookies[i].split('=');
+        nom_cookie = temp[0];
+        valor_cookie = temp[1];
+        return valor_cookie;
     }
 }
 function removeSpaces(string) {
