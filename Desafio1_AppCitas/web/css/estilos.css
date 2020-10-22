@@ -22,9 +22,9 @@ and open the template in the editor.
     from {
         width: 200px;
     }
-
+    
     to {
-        transform: scale(1.1);
+        transform: scale(1.0);
     }
 }
 
@@ -117,6 +117,7 @@ footer.index{
 }
 .imagenLogo{
     display: block;
+    width: 250px;
     margin:auto;
     animation-duration: 2s;
     animation-name: escaladaImagen;
@@ -182,7 +183,7 @@ fieldset{
 /*------------------------------FORMULARIO LOGIN*/
 form[name=login] input:not([type="checkbox"]){
     width: 100%;
-    
+
 }
 
 form[name=login] p{
