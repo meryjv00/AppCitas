@@ -404,6 +404,9 @@
             }
             //Cerrar sesion
             if (request.getParameter("cerrarSesion") != null) {
+                int usuariosConectados = (int) application.getAttribute("usuariosConectados");
+                usuariosConectados--;
+                application.setAttribute("usuariosConectados", usuariosConectados);
                 while (session.getAttributeNames().hasMoreElements()) {
                     session.removeAttribute(session.getAttributeNames().nextElement());
                 }
