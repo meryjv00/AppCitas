@@ -28,6 +28,7 @@ function validacionRegistro() {
 
     //-----------------------------DIBUJE CAPTCHA
     captcha();
+
     //-----------------------------FORMULARIO SUBMIT
     var correcto;
 
@@ -61,6 +62,7 @@ function validacionRegistro() {
         if (!correcto) {
             event.preventDefault();
         }
+
 
         if (!captchaCorrecto) {
             event.preventDefault();
@@ -164,7 +166,7 @@ function validacionRegistro() {
     });
 
     function errorTfno() {
-        if(tfno.validity.valueMissing){
+        if (tfno.validity.valueMissing) {
             tfnoError.textContent = 'Debe introducir un teléfono.';
         }
         //No cumple con el pattern
