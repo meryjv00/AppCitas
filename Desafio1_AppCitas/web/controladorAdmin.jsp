@@ -61,7 +61,6 @@
                 }
 
                 if (accion.equals("Quitar administrador")) {
-                    //Quitar rol de administrador
                     ConexionEstatica.quitarAdmin(u);
 
                     response.sendRedirect("Vistas/CRUDusuarios.jsp");
@@ -107,7 +106,9 @@
                 response.sendRedirect("Vistas/CRUDusuarios.jsp");
             }
             if (request.getParameter("CerrarSesion") != null) {
-                //session.invalidate();
+                int usuariosConectados = (int) application.getAttribute("usuariosConectados");
+                usuariosConectados--;
+                application.setAttribute("usuariosConectados", usuariosConectados);
                 while (session.getAttributeNames().hasMoreElements()) {
                     session.removeAttribute(session.getAttributeNames().nextElement());
                 }
