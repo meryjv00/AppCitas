@@ -215,7 +215,7 @@
                 ConexionEstatica.encuestaRealizada(u);
                 ConexionEstatica.cerrarBD();
 
-                response.sendRedirect("Vistas/index.jsp");
+                response.sendRedirect("index.jsp");
 
             }
 

@@ -63,7 +63,7 @@
                     }
                 %>
 
-                <div class=m1>
+                <div class="m1">
                     <a href="Vistas/registro.jsp"><input type="button" name="Registrar" value="Registrate" class="boton"/></a>
                 </div>
                 <hr>
