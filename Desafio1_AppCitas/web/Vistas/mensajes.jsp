@@ -80,13 +80,13 @@
                                     Mensaje m = (Mensaje) mensajesParaMiNoLeidos.get(i);
                         %>
                         <div class="row">
-                            <div class="col-m-3">
+                            <div class="col-m-3 col-l-3">
                                 <span>Asunto: <%=m.getAsunto()%></span>
                             </div>
-                            <div class="col-m-6">
+                            <div class="col-m-5 col-l-6">
                                 <span>De: <%=m.getEmisor()%></span>
                             </div>
-                            <div class="col-m-3">
+                            <div class="col-m-4 col-l-3">
                                 <input type="submit" name="<%=i%>" value="Leer mensaje" class="boton"/>
                             </div>
                         </div>
@@ -116,13 +116,13 @@
                                     Mensaje m = (Mensaje) mensajesParaMi.get(i);
                         %>
                         <div class="row">
-                            <div class="col-m-3">
+                            <div class="col-m-3 col-l-3">
                                 <span>Asunto: <%=m.getAsunto()%></span>
                             </div>
-                            <div class="col-m-6">
+                            <div class="col-m-5 col-l-6">
                                 <span>De: <%=m.getEmisor()%></span>
                             </div>
-                            <div class="col-m-3">
+                            <div class="col-m-4 col-l-3">
                                 <input type="submit" name="<%=i%>" value="Ver en detalle" class="boton"/>
                             </div>
                         </div>
@@ -152,14 +152,14 @@
                                     Mensaje m = (Mensaje) mensajesEnviados.get(i);
                         %>
                         <div class="row">
-                            <div class="col-m-3">
+                            <div class="col-m-3 col-l-3">
                                 <span>Asunto: <%=m.getAsunto()%></span>
                             </div>
-                            <div class="col-m-6">
+                            <div class="col-m-5 col-l-6">
                                 <span>Para: <%=m.getReceptor()%></span>
                             </div>
-                            <div class="col-m-3">
-                                <input type="submit" name="<%=i%>" value="Ver en detalle" class="boton"/>
+                            <div class="col-m-4 col-l-3">
+                                <input type="submit" name="<%=i%>" value="Ver enviado" class="boton"/>
                             </div>
                         </div>
                         <%

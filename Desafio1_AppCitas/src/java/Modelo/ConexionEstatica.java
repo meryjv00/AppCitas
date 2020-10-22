@@ -514,4 +514,21 @@ public class ConexionEstatica {
         } catch (SQLException ex) {
         }
     }
+
+    public static Mensaje obtenerMensaje(int id) {
+        Mensaje m = null;
+        try {
+            String sentencia = "SELECT * FROM " + Constantes.tabla_mensajes + " WHERE Id=" + id;
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                m = new Mensaje(Conj_Registros.getInt("Id"), Conj_Registros.getString("Asunto"),
+                        Conj_Registros.getString("Cuerpo"), Conj_Registros.getString("Emisor"),
+                        Conj_Registros.getString("Receptor"), Conj_Registros.getString("Fecha"),
+                        Conj_Registros.getBoolean("Leido"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return m;
+    }
 }

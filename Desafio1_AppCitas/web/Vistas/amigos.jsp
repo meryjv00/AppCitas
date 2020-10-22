@@ -68,7 +68,7 @@
                             </div>
                             <!--Ver usuario-->
                             <div class="col-m-4">
-                                <input type="submit" name="<%=i%>" value="Ver en detalle" class="boton"/>
+                                <input type="submit" name="<%=i%>" value="Ver amigo" class="boton"/>
                             </div>
                             <!--Enviar mensaje-->
                             <div class="col-m-4">

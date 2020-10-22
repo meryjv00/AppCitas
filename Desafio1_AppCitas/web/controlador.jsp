@@ -287,7 +287,7 @@
                     }
                     Usuario usu = (Usuario) amigos.get(posElegida);
 
-                    if (accion.equals("Ver en detalle")) {
+                    if (accion.equals("Ver amigo")) {
                         session.setAttribute("amigoSeleccionado", usu);
                         response.sendRedirect("Vistas/detalleAmigo.jsp");
                     }
@@ -467,6 +467,9 @@
             //Página detalle mensaje los marca como leídos
             if (session.getAttribute("mensajesParaMi") != null) {
                 LinkedList mensajesParaMiNoLeidos = (LinkedList) session.getAttribute("mensajesParaMiNoLeidos");
+                LinkedList mensajesParaMi = (LinkedList) session.getAttribute("mensajesParaMi");
+                LinkedList mensajesEnviados = (LinkedList) session.getAttribute("mensajesEnviados");
+
                 String pos = "", accion = "";
                 int posElegida = 0;
 
@@ -478,7 +481,6 @@
                             posElegida = i;
                         }
                     }
-
                     if (accion.equals("Leer mensaje")) {
                         Mensaje m = (Mensaje) mensajesParaMiNoLeidos.get(posElegida);
                         ConexionEstatica.nueva();
@@ -487,7 +489,36 @@
                         session.setAttribute("mensajeSeleccionado", m);
                         response.sendRedirect("Vistas/detalleMensaje.jsp");
                     }
+                }
 
+                if (mensajesParaMi.size() > 0) {
+                    for (int i = 0; i < mensajesParaMi.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+                    if (accion.equals("Ver en detalle")) {
+                        Mensaje m = (Mensaje) mensajesParaMi.get(posElegida);
+                        session.setAttribute("mensajeSeleccionado", m);
+                        response.sendRedirect("Vistas/detalleMensaje.jsp");
+                    }
+                }
+                
+                if (mensajesEnviados.size() > 0) {
+                    for (int i = 0; i < mensajesEnviados.size(); i++) {
+                        pos = String.valueOf(i);
+                        if (request.getParameter(pos) != null) {
+                            accion = request.getParameter(pos).toString();
+                            posElegida = i;
+                        }
+                    }
+                    if (accion.equals("Ver enviado")) {
+                        Mensaje m = (Mensaje) mensajesEnviados.get(posElegida);
+                        session.setAttribute("mensajeSeleccionado", m);
+                        response.sendRedirect("Vistas/detalleMensaje.jsp");
+                    }
                 }
             }
         %>
