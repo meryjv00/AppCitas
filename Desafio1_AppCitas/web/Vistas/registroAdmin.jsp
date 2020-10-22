@@ -15,7 +15,7 @@
         <link rel="icon" type="image/png" href="../img/logo4.png">
         <script src="../js/validacion.js"></script>
     </head>
-    <body>
+    <body onload="validacionRegistroAdmin()">
         <header class="row">
             <div class="col-m-4"></div>
             <div class="col-m-4">
@@ -24,7 +24,7 @@
         </header>
         <main class="row registro">
             <div class="col-m-3 col-l-4"></div>
-            <form name="login" action="../controladorAdmin.jsp" id="registro" class="col-m-6 col-l-4"> 
+            <form name="login" action="../controladorAdmin.jsp" id="registroAdmin" class="col-m-6 col-l-4" novalidate> 
                 <h1>Registra un usuario:</h1>
                 <div class="m1">
                     <label for="email">
