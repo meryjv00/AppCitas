@@ -32,6 +32,15 @@
                     verificado = VerificarRecaptcha.verificar(gRecaptchaResponse);
                 }
 
+                //USUARIOS CONECTADOS
+                Integer contador = (Integer) application.getAttribute("usuariosConectados");
+                if (contador == null || contador == 0) {
+                    contador = 1;
+                } else {
+                    contador++;
+                }
+                application.setAttribute("usuariosConectados", contador);
+                
                 ConexionEstatica.nueva();
                 Usuario u = ConexionEstatica.existeUsuario(email, contra);
                 if (u != null && verificado) {
@@ -505,7 +514,7 @@
                         response.sendRedirect("Vistas/detalleMensaje.jsp");
                     }
                 }
-                
+
                 if (mensajesEnviados.size() > 0) {
                     for (int i = 0; i < mensajesEnviados.size(); i++) {
                         pos = String.valueOf(i);
