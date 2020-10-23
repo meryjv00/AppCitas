@@ -52,15 +52,26 @@
                     <!--Cuadro para lista de amigos-->
                     <div class="col-m-8 col-l-6 cuadro">
                         <%
+                            LinkedList amigosConectados = (LinkedList) application.getAttribute("amigosConectados");
+                        %>
+                        <p>Amigos conectados: <%=amigosConectados.size()%></p>
+                        <%
                             LinkedList amigos = (LinkedList) session.getAttribute("amigos");
                             if (amigos.size() > 0) {
                                 for (int i = 0; i < amigos.size(); i++) {
+                                    String color = "#ff6f69";
                                     Usuario u = (Usuario) amigos.get(i);
+                                    for (int j = 0; j < amigosConectados.size(); j++) {
+                                        Usuario usu = (Usuario) amigosConectados.get(j);
+                                        if (u.getEmail().equals(usu.getEmail())) {
+                                            color = "#96ceb4";
+                                        }
+                                    }
                         %>
                         <div class="row">
                             <!--Input conectado-->
                             <div class="col-m-1">
-                                <input type="radio" name="<%=i%>"/>
+                                <input type="radio" name="<%=i%>" style="background-color: <%=color%>"/>
                             </div>
                             <!--Apodo usuario-->
                             <div class="col-m-3">

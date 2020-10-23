@@ -553,4 +553,31 @@ public class ConexionEstatica {
         }
         return id;
     }
+
+    public static boolean hayFichero(int id) {
+        boolean hay = false;
+        try {
+            String sentencia = "SELECT * FROM " + Constantes.tabla_ficheroadj + " WHERE Id=" + id;
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                hay = true;
+            }
+        } catch (SQLException ex) {
+        }
+        return hay;
+    }
+
+    public static String rutaFichero(int id) {
+        String ruta = "";
+        try {
+            String sentencia = "SELECT Fichero FROM " + Constantes.tabla_ficheroadj + " WHERE Id=" + id;
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                ruta = Conj_Registros.getString("Fichero");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ruta;
+    }
 }

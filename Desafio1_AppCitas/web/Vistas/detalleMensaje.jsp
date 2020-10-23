@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="Modelo.ConexionEstatica"%>
 <%@page import="Modelo.Mensaje"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -82,6 +83,23 @@
                                     <textarea name="cuerpo"><%=m.getCuerpo()%></textarea>
                                 </div>
                             </div>
+                            <%
+                                //Comprobar que hay fichero
+                                ConexionEstatica.nueva();
+                                if (ConexionEstatica.hayFichero(m.getId())) {
+                                    String ruta = ConexionEstatica.rutaFichero(m.getId());
+                            %>
+                            <div class="row">
+                                <div class="col-m-4"></div>
+                                <div class="col-m-4">
+                                    <img src="ficheros/10_maria@gmail.com.jpg"/>
+                                </div>
+                                <div class="col-m-4"></div>
+                            </div>
+                            <%
+                                }
+                                ConexionEstatica.cerrarBD();
+                            %>
                         </fieldset>
                     </div>
                     <div class="col-m-2 col-l-3"></div>

@@ -4,6 +4,7 @@
     Author     : Mery
 --%>
 
+<%@page import="java.util.LinkedList"%>
 <%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

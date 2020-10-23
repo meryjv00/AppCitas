@@ -109,6 +109,17 @@
                 int usuariosConectados = (int) application.getAttribute("usuariosConectados");
                 usuariosConectados--;
                 application.setAttribute("usuariosConectados", usuariosConectados);
+                //Borra de la lista de emails a la persona q se desconecta
+                LinkedList personasConectadas = (LinkedList) application.getAttribute("personasConectadas");
+                Usuario usu = (Usuario) session.getAttribute("usuario");
+                for (int i = 0; i < personasConectadas.size(); i++) {
+                    String email = (String) personasConectadas.get(i);
+                    if (email.equals(usu.getEmail())) {
+                        personasConectadas.remove(i);
+                    }
+                }
+                application.setAttribute("personasConectadas", personasConectadas);
+
                 while (session.getAttributeNames().hasMoreElements()) {
                     session.removeAttribute(session.getAttributeNames().nextElement());
                 }

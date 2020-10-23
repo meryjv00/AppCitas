@@ -49,6 +49,7 @@
                 }
                 application.setAttribute("usuariosConectados", contador);
 
+                //COMPROBAMOS QUE EXISTE EL USUARIO
                 ConexionEstatica.nueva();
                 Usuario u = ConexionEstatica.existeUsuario(email, contra);
                 if (u != null && verificado) {
@@ -135,6 +136,18 @@
                     }
 
                     ConexionEstatica.cerrarBD();
+
+                    //AÑADIR A LA LISTA DE EMAILS DE PERSONAS CONECTADAS
+                    if (application.getAttribute("personasConectadas") != null) {
+                        LinkedList personasConectadas = (LinkedList) application.getAttribute("personasConectadas");
+                        personasConectadas.add(u.getEmail());
+                        application.setAttribute("personasConectadas", personasConectadas);
+                    } else {
+                        LinkedList personasConectadas = new LinkedList();
+                        personasConectadas.add(u.getEmail());
+                        application.setAttribute("personasConectadas", personasConectadas);
+                    }
+
                     //Si tiene más de 2 roles es admin
                     if (u.sizeRoles() == 2) {
 
@@ -271,7 +284,19 @@
                     }
                 }
                 ConexionEstatica.cerrarBD();
+                LinkedList amigosConectados = new LinkedList();
+                LinkedList personasConectadas = (LinkedList) application.getAttribute("personasConectadas");
+                for (int i = 0; i < personasConectadas.size(); i++) {
+                    String email = (String) personasConectadas.get(i);
+                    for (int j = 0; j < amigos.size(); j++) {
+                        Usuario u = (Usuario) amigos.get(j);
+                        if (u.getEmail().equals(email)) {
+                            amigosConectados.add(u);
+                        }
+                    }
+                }
                 session.setAttribute("amigos", amigos);
+                application.setAttribute("amigosConectados", amigosConectados);
                 response.sendRedirect("Vistas/amigos.jsp");
             }
 
@@ -412,12 +437,26 @@
             }
             //Cerrar sesion
             if (request.getParameter("cerrarSesion") != null) {
+                //Descuenta 1 al número de usuarios conectados
                 int usuariosConectados = (int) application.getAttribute("usuariosConectados");
                 usuariosConectados--;
                 application.setAttribute("usuariosConectados", usuariosConectados);
+                //Borra de la lista de emails a la persona q se desconecta
+                LinkedList personasConectadas = (LinkedList) application.getAttribute("personasConectadas");
+                Usuario usu = (Usuario) session.getAttribute("usuario");
+                for (int i = 0; i < personasConectadas.size(); i++) {
+                    String email = (String) personasConectadas.get(i);
+                    if (email.equals(usu.getEmail())) {
+                        personasConectadas.remove(i);
+                    }
+                }
+                application.setAttribute("personasConectadas", personasConectadas);
+
+                //Borra todos los atr de sesión-> session.invalidate() error
                 while (session.getAttributeNames().hasMoreElements()) {
                     session.removeAttribute(session.getAttributeNames().nextElement());
                 }
+
                 response.sendRedirect("index.jsp");
             }
 
@@ -471,7 +510,7 @@
                 }
 
             }
-            
+
             //Página detalle mensaje los marca como leídos
             if (session.getAttribute("mensajesParaMi") != null) {
                 LinkedList mensajesParaMiNoLeidos = (LinkedList) session.getAttribute("mensajesParaMiNoLeidos");
