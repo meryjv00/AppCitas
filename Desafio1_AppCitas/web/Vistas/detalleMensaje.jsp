@@ -88,6 +88,8 @@
                                 ConexionEstatica.nueva();
                                 if (ConexionEstatica.hayFichero(m.getId())) {
                                     String ruta = ConexionEstatica.rutaFichero(m.getId());
+                                    //String rutaCompleta = "http://localhost:8080/Desafio1_AppCitas/" + ruta;
+                                    //String rutaCompleta = "http://localhost:8080/ficheros/prueba.jpg";
                             %>
                             <div class="row">
                                 <div class="col-m-4"></div>
