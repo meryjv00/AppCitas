@@ -40,7 +40,7 @@
         </div>
         <main class="row">
             <div class="col-m-2 col-l-2"></div>
-            <form name="login" action="../controlador.jsp" class="col-m-8 col-l-8">
+            <form name="login" action="../enviarMensajeArchivo.jsp" enctype="multipart/form-data" method="post" class="col-m-8 col-l-8">
                 <h1>Envía un mensaje </h1>
                 <div class="row">
                     <div class="col-m-2 col-l-3"></div>

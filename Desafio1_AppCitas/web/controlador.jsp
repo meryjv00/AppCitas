@@ -4,6 +4,13 @@
     Author     : Mery
 --%>
 
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@page import="org.apache.commons.fileupload.FileItemFactory"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%@page import="org.apache.commons.fileupload.FileItem"%>
+<%@page import="java.io.File"%>
+<%@page import="Auxiliar.Constantes"%>
+<%@page import="java.util.List"%>
 <%@page import="Modelo.Mensaje"%>
 <%@page import="Auxiliar.VerificarRecaptcha"%>
 <%@page import="Modelo.Email"%>
@@ -11,6 +18,7 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.ConexionEstatica"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -463,21 +471,7 @@
                 }
 
             }
-
-            //Enviar mensaje
-            if (request.getParameter("EnviarMsj") != null) {
-                String de = request.getParameter("de");
-                String para = request.getParameter("para");
-                String asunto = request.getParameter("asunto");
-                String cuerpo = request.getParameter("cuerpo");
-
-                Mensaje m = new Mensaje(asunto, cuerpo, de, para);
-                ConexionEstatica.nueva();
-                ConexionEstatica.enviarMensaje(m);
-                ConexionEstatica.cerrarBD();
-                response.sendRedirect("Vistas/personasCompatibles.jsp");
-            }
-
+            
             //Página detalle mensaje los marca como leídos
             if (session.getAttribute("mensajesParaMi") != null) {
                 LinkedList mensajesParaMiNoLeidos = (LinkedList) session.getAttribute("mensajesParaMiNoLeidos");
