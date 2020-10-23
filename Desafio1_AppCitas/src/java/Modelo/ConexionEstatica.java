@@ -531,4 +531,26 @@ public class ConexionEstatica {
         }
         return m;
     }
+
+    public static void enviarFichero(int id, String ruta) {
+        try {
+            String sentencia = "INSERT INTO " + Constantes.tabla_ficheroadj + " VALUES(" + id + ",'"
+                    + ruta + "')";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(sentencia);
+        } catch (SQLException ex) {
+        }
+    }
+
+    public static int obtenerUltId() {
+        int id = 0;
+        try {
+            String sentencia = "SELECT max(Id) from " + Constantes.tabla_mensajes;
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            if (Conj_Registros.next()) {
+                id = Conj_Registros.getInt("max(Id)");
+            }
+        } catch (SQLException ex) {
+        }
+        return id;
+    }
 }

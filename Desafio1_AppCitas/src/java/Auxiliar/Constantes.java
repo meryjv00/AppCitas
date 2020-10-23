@@ -25,4 +25,5 @@ public class Constantes {
     public static String tabla_mensajes = "mensajes";
     public static String tabla_amigos = "amigos";
     public static String tabla_ficheroadj = "ficheroadj";
+
 }

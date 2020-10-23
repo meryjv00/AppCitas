@@ -4,6 +4,7 @@
     Author     : daw209
 --%>
 
+<%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.ConexionEstatica"%>
 <%@page import="Modelo.ConexionEstatica"%>
 <%@page import="Modelo.Mensaje"%>
@@ -29,6 +30,7 @@
             String asunto = "";
             String cuerpo = "";
             String rutaFichero = "";
+            int id = 0;
             boolean hayFichero = false;
             FileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
@@ -39,11 +41,16 @@
                 FileItem uploaded = (FileItem) item;
 
                 if (!uploaded.isFormField()) {
-                    String email = "";
-                    File fichero = new File(Constantes.rutaServidor, "ddfd.jpg"); //El archivo se guardará en 'glassfish5/glassfish/domains/domain1/config/perfiles'.
+                    hayFichero = true;
+                    ConexionEstatica.nueva();
+                    id = ConexionEstatica.obtenerUltId();
+                    ConexionEstatica.cerrarBD();
+                    id++;
+                    Usuario usu = (Usuario) session.getAttribute("usuario");
+                    File fichero = new File(Constantes.rutaServidor, id + "_" + usu.getEmail() + ".jpg");
                     uploaded.write(fichero);
-                    out.println("Archivo '" + uploaded.getName() + "' subido correctamente.");
-                    rutaFichero = "ficheros/" + uploaded.getName();
+                    rutaFichero = "ficheros/" + id + "_" + usu.getEmail() + ".jpg";
+
                 } else {
                     String key = uploaded.getFieldName();
                     String valor = uploaded.getString();
@@ -65,9 +72,11 @@
             Mensaje m = new Mensaje(asunto, cuerpo, de, para);
             ConexionEstatica.nueva();
             ConexionEstatica.enviarMensaje(m);
-            if(hayFichero){
-                ConexionEstatica.enviarFichero(m.getId(),rutaFichero);
+
+            if (hayFichero) {
+                ConexionEstatica.enviarFichero(id, rutaFichero);
             }
+
             ConexionEstatica.cerrarBD();
             response.sendRedirect("Vistas/personasCompatibles.jsp");
         %>
