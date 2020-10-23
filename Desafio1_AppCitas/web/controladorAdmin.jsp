@@ -87,6 +87,7 @@
 
                 ConexionEstatica.nueva();
                 if (rolAdmin != null) {
+                    u.setActivado(true);
                     if (ConexionEstatica.insertarAdmin(u)) {
                         response.sendRedirect("Vistas/CRUDusuarios.jsp");
                     }

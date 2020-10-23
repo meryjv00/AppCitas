@@ -250,8 +250,9 @@ public class ConexionEstatica {
         try {
             String Sentencia = "DELETE FROM " + Constantes.tabla_usuarios + " WHERE Email = '" + u.getEmail() + "'";
             ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
-            //Borrar de + sitios
             Sentencia = "DELETE FROM " + Constantes.tabla_asignacion_roles + " WHERE Email = '" + u.getEmail() + "'";
+            ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
+            Sentencia = "DELETE FROM " + Constantes.tabla_asignacion_preferencias + " WHERE Email ='" + u.getEmail() + "'";
             ConexionEstatica.Sentencia_SQL.executeUpdate(Sentencia);
             correcto = true;
         } catch (SQLException ex) {

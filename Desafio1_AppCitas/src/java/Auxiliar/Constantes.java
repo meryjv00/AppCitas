@@ -11,7 +11,7 @@ package Auxiliar;
  */
 public class Constantes {
 
-    public static String BBDD = "desafio1";
+    public static String BBDD = "desafio";
     public static String usuario = "Maria";
     public static String password = "Chubaca2020";
     public static String ficheroBitacora = "bitacora.txt";

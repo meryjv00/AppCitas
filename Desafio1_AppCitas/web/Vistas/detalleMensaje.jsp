@@ -92,7 +92,7 @@
                             <div class="row">
                                 <div class="col-m-4"></div>
                                 <div class="col-m-4">
-                                    <img src="ficheros/10_maria@gmail.com.jpg"/>
+                                    <img src="<%=ruta%>"/>
                                 </div>
                                 <div class="col-m-4"></div>
                             </div>
