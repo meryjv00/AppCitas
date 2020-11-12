@@ -1,5 +1,5 @@
 
-## Aplicación web de mensajería para encontrar pareja - María Juan Viñas 
+## 💜Aplicación web de mensajería para encontrar pareja💜
 GITHUB: https://github.com/meryjv00/AppCitas  
 TRELLO: https://trello.com/b/QZFiUdfp/desafio-1  
 --------------------------------------------------------------------------------------------------------
