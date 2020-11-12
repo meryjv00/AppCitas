@@ -1,0 +1,24 @@
+LINEAS GENERALES DE EVALUACIÓN
+
+8-Animación:
+*entrada: para todos los formularios
+*escaladaImagen: para escalar imagen del login (index.jsp)
+
+9-Transición:
+*.boton:hover: para la clase .boton (todos los botones de las páginas)
+
+10-Transformación:	
+*En la animación de escalado de la imagen del login (index.jsp)
+
+11-Elementos flotantes:
+*.float: En el centrado de la imagen en (inicio.jsp)
+
+12-Posicionamiento absoluto:
+*.detalle: En (index.jsp) el detalle de la derecha que pone "App Citas"
+
+13-Posicionamiento fijo:
+*.fija: En (personasCompatibles.jsp/mensajes.jsp/amigos.jsp/perfil.jsp) detalle de arriba a la derecha
+
+14-Medidas vh y vw:
+*vh: .detalle: En (index.jsp) el detalle de la derecha que pone "App Citas"
+*vw: .float: En el centrado de la imagen en (inicio.jsp)
